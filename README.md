@@ -1,17 +1,41 @@
 # 📡 موجّه - Mowajjih (ZTE MC801A & MC801A1 Manager)
 
+<div align="center">
+
+[![Latest Release](https://img.shields.io/github/v/release/RaadDev/ZTE-MC801A1-UI-Controller?style=for-the-badge&color=0284c7&label=الإصدار_الأخير)](https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest)
+[![Direct Download](https://img.shields.io/badge/تحميل_مباشر-Windows_(x64)-10b981?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest)
+[![License: MIT](https://img.shields.io/badge/الترخيص-MIT-3b82f6?style=for-the-badge)](LICENSE)
+
+</div>
+
 تطبيق سطح مكتب احترافي عالي الأداء باللغة العربية مخصص لمراقبة وإدارة وبرمجة راوترات **ZTE MC801A** و **ZTE MC801A1 5G** على نظام التشغيل Windows. يعمل التطبيق عبر واجهة مستخدم عصرية فائقة السرعة بنظام الاتجاه من اليمين لليسار (RTL) مع جسر محلي آمن ومستقل (`LocalBridgeServer`).
 
 ---
 
-## 🚀 حزم التثبيت والتشغيل الجاهزة (Windows Executables)
+## 🚀 روابط التحميل المباشر والسريع (Direct Downloads)
 
-توجد النسخ المبنية الجاهزة في مجلد [`release/`](file:///c:/Users/OPN_I/.gemini/antigravity/scratch/mowajjih/release/):
+يمكنك تحميل النسخة المناسبة لك مباشرة بنقرة واحدة فائقة السرعة من خوادم GitHub الرسمية:
 
-| الملف | النوع | الوصف |
-| :--- | :--- | :--- |
-| **`mowajjih-setup.exe`** | **مثبت الإعداد الرسمي (Setup)** | ملف تثبيت رسمي لنظام Windows، يضع اختصاراً على سطح المكتب وقائمة ابدأ، ويدعم التثبيت المخصص وإلغاء التثبيت النظيف من لوحة التحكم. |
-| **`mowajjih-portable.exe`** | **نسخة محمولة (Portable)** | نسخة خفيفة تعمل مباشرة بنقرة واحدة دون الحاجة لأي تثبيت أو صلاحيات مدير النظام (صامتة ومحمولة). |
+<div align="center">
+
+<a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/download/v1.0.0/mowajjih-setup.exe">
+  <img src="https://img.shields.io/badge/تحميل_المثبت_الرسمي-Setup_(.exe)-0284c7?style=for-the-badge&logo=windows&logoColor=white" alt="تحميل مثبت الإعداد الرسمي" height="40">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/download/v1.0.0/mowajjih-portable.exe">
+  <img src="https://img.shields.io/badge/تحميل_النسخة_المحمولة-Portable_(.exe)-10b981?style=for-the-badge&logo=windows&logoColor=white" alt="تحميل النسخة المحمولة بدون تثبيت" height="40">
+</a>
+
+</div>
+
+<br>
+
+| الملف | النوع | الحجم | رابط التنزيل المباشر | الوصف والمميزات |
+| :--- | :--- | :--- | :--- | :--- |
+| **`mowajjih-setup.exe`** | **مثبت الإعداد الرسمي (Setup)** | **~80 MB** | [⬇️ **تحميل مثبت Setup**](https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/download/v1.0.0/mowajjih-setup.exe) | ملف تثبيت رسمي لنظام Windows، يضع اختصاراً على سطح المكتب وقائمة ابدأ، ويدعم التثبيت المخصص وإلغاء التثبيت النظيف من لوحة التحكم. |
+| **`mowajjih-portable.exe`** | **نسخة محمولة (Portable)** | **~72 MB** | [⬇️ **تحميل النسخة المحمولة**](https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/download/v1.0.0/mowajjih-portable.exe) | نسخة خفيفة تعمل مباشرة بنقرة واحدة دون الحاجة لأي تثبيت أو صلاحيات مدير النظام (صامتة ومحمولة). |
+
+> 💡 **ملاحظة:** يمكنك أيضاً تصفح وتنزيل كافة الإصدارات من [صفحة الإصدارات الرسمية على GitHub (Releases)](https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases).
 
 ---
 
