@@ -1,0 +1,33 @@
+import { contextBridge, ipcRenderer } from 'electron';
+
+contextBridge.exposeInMainWorld('mowajjih', {
+  getBridgePort: () => ipcRenderer.invoke('get-bridge-port'),
+  checkBridge: () => ipcRenderer.invoke('check-bridge'),
+  getCurrentHostInfo: (routerIp?: string) => ipcRenderer.invoke('get-current-host-info', routerIp),
+  pingRouter: (routerIp?: string) => ipcRenderer.invoke('ping-router', routerIp),
+  connectRouter: (data: { routerIp: string; password: string }) => ipcRenderer.invoke('connect-router', data),
+  disconnectRouter: () => ipcRenderer.invoke('disconnect-router'),
+  getStatus: () => ipcRenderer.invoke('get-status'),
+  getDevices: () => ipcRenderer.invoke('get-devices'),
+  scanNetwork: () => ipcRenderer.invoke('scan-network'),
+  saveDeviceAlias: (data: { mac: string; alias: string }) => ipcRenderer.invoke('save-device-alias', data),
+  getWifi: () => ipcRenderer.invoke('get-wifi'),
+  getNetworkSettings: () => ipcRenderer.invoke('get-network-settings'),
+  setNetworkMode: (mode: string) => ipcRenderer.invoke('set-network-mode', mode),
+  set5gBands: (bands: string[]) => ipcRenderer.invoke('set-5g-bands', bands),
+  set4gBands: (params: { bands: string[]; isAuto?: boolean }) => ipcRenderer.invoke('set-4g-bands', params),
+  setCellLock: (params: { pci: string; earfcn: string; clear?: boolean }) => ipcRenderer.invoke('set-cell-lock', params),
+  setWifiSettings: (settings: { ssid?: string; password?: string; hideSsid?: boolean; enabled?: boolean }) => ipcRenderer.invoke('set-wifi-settings', settings),
+  setWanConnection: (connect: boolean) => ipcRenderer.invoke('set-wan-connection', connect),
+  getSms: () => ipcRenderer.invoke('get-sms'),
+  deleteSms: (id: string) => ipcRenderer.invoke('delete-sms', id),
+  rebootRouter: () => ipcRenderer.invoke('reboot-router'),
+  getAdvancedSettings: () => ipcRenderer.invoke('get-advanced-settings'),
+  saveAdvancedSettings: (section: string, data: any) => ipcRenderer.invoke('save-advanced-settings', { section, data }),
+  checkFirmwareUpdate: () => ipcRenderer.invoke('check-firmware-update'),
+  factoryResetRouter: () => ipcRenderer.invoke('factory-reset-router'),
+  runPingDiagnostic: (host: string) => ipcRenderer.invoke('run-ping-diagnostic', host),
+  saveNonSensitiveConfig: (config: any) => ipcRenderer.invoke('save-config', config),
+  loadNonSensitiveConfig: () => ipcRenderer.invoke('load-config'),
+  openExternal: (url: string) => ipcRenderer.invoke('open-external', url)
+});

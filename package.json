@@ -1,0 +1,85 @@
+{
+  "name": "mowajjih",
+  "productName": "Mowajjih",
+  "version": "1.0.0",
+  "description": "تطبيق سطح مكتب عربي متطور لإدارة ومراقبة راوتر ZTE 5G",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "build": "node build.js",
+    "pack": "node build.js --minify",
+    "dist": "node build.js --minify && electron-builder --win",
+    "dist:setup": "node build.js --minify && electron-builder --win nsis",
+    "dist:portable": "node build.js --minify && electron-builder --win portable",
+    "test": "node tests/test_bridge.js",
+    "typecheck": "tsc --noEmit",
+    "start": "node build.js && electron ."
+  },
+  "keywords": [
+    "zte",
+    "mc801a",
+    "router",
+    "5g",
+    "electron",
+    "arabic"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0"
+  },
+  "build": {
+    "appId": "com.antigravity.mowajjih",
+    "productName": "Mowajjih",
+    "copyright": "Copyright © 2026 Mowajjih",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "asInvoker",
+      "legalTrademarks": "Mowajjih"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "موجّه - Mowajjih",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "artifactName": "mowajjih-setup.exe",
+      "runAfterFinish": true
+    },
+    "portable": {
+      "artifactName": "mowajjih-portable.exe",
+      "requestExecutionLevel": "user"
+    },
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "compression": "maximum"
+  }
+}

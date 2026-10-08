@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>موجّه - لوحة تحكم راوتر ZTE MC801A1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- App Layout Container -->
+  <div class="app-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="قائمة التنقل الرئيسية">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="13" width="20" height="8" rx="2"></rect>
+              <path d="M6 13V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8"></path>
+              <circle cx="12" cy="17" r="1"></circle>
+              <circle cx="6" cy="17" r="1"></circle>
+              <circle cx="18" cy="17" r="1"></circle>
+              <path d="M12 9V5"></path>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <div class="brand-title-row">
+              <h1 class="brand-title">موجّه</h1>
+              <span class="brand-version-pill">v1.2</span>
+            </div>
+            <span class="brand-subtitle">ZTE MC801A1 5G</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="nav-menu" role="tablist">
+        <!-- المجموعة 1: المراقبة والشبكة -->
+        <div class="nav-group">
+          <div class="nav-group-title">
+            <span>المراقبة والشبكة</span>
+          </div>
+          <button class="nav-item active" data-tab="overview" role="tab" aria-selected="true" id="tab-overview">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 4v16"></path></svg>
+            </span>
+            <span class="nav-label">نظرة عامة والإشارة</span>
+          </button>
+
+          <button class="nav-item" data-tab="devices" role="tab" aria-selected="false" id="tab-devices">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            </span>
+            <span class="nav-label">الأجهزة المتصلة</span>
+            <span class="badge-count" id="devices-badge">0</span>
+          </button>
+        </div>
+
+        <!-- المجموعة 2: التحكم والاتصال -->
+        <div class="nav-group">
+          <div class="nav-group-title">
+            <span>التحكم والاتصال</span>
+          </div>
+          <button class="nav-item" data-tab="wifi" role="tab" aria-selected="false" id="tab-wifi">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            </span>
+            <span class="nav-label">الاتصال و Wi‑Fi</span>
+          </button>
+
+          <button class="nav-item" data-tab="bands" role="tab" aria-selected="false" id="tab-bands">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </span>
+            <span class="nav-label">تثبيت النطاقات</span>
+          </button>
+        </div>
+
+        <!-- المجموعة 3: الأدوات والنظام -->
+        <div class="nav-group">
+          <div class="nav-group-title">
+            <span>الأدوات والنظام</span>
+          </div>
+          <button class="nav-item" data-tab="sms" role="tab" aria-selected="false" id="tab-sms">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </span>
+            <span class="nav-label">الرسائل (SMS)</span>
+            <span class="badge-count" id="sms-unread-badge" style="display:none;">0</span>
+          </button>
+
+          <button class="nav-item" data-tab="advanced" role="tab" aria-selected="false" id="tab-advanced">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </span>
+            <span class="nav-label">إعدادات متقدمة</span>
+            <span class="badge-pill-new">ZTE</span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Sidebar Footer (Bridge Status) -->
+      <div class="sidebar-footer">
+        <div class="bridge-card" id="bridge-status-card" title="حالة الاتصال بالجسر المحلي 127.0.0.1:5188">
+          <div class="bridge-card-top">
+            <div class="bridge-status-indicator">
+              <span class="status-dot" id="bridge-status-dot"></span>
+              <span class="bridge-title">الجسر المحلي</span>
+            </div>
+            <span class="bridge-port-badge" id="bridge-port-tag">5188</span>
+          </div>
+          <div class="bridge-card-bottom">
+            <span class="bridge-sub" id="bridge-status-text">جارٍ الفحص...</span>
+            <span class="bridge-latency-val" id="bridge-latency-val">0.8 ms</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header Bar -->
+      <header class="top-bar">
+        <div class="top-bar-start">
+          <div class="connection-pill" id="connection-pill">
+            <span class="status-dot pulse" id="router-status-dot"></span>
+            <span id="router-status-label">غير متصل بالراوتر</span>
+          </div>
+          <span class="model-tag" id="model-tag">ZTE MC801A1</span>
+          <!-- Live Ping Latency Badge -->
+          <div class="ping-badge" id="ping-badge" title="زمن استجابة الراوتر (Ping)">
+            <span class="ping-icon">⚡</span>
+            <span id="ping-text">-- ms</span>
+          </div>
+        </div>
+
+        <div class="top-bar-end">
+          <!-- Modern Spotlight / Command Palette Button -->
+          <button class="btn-command-palette" id="btn-open-command-palette" title="لوحة الأوامر السريعة والبحث (Ctrl+K)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span class="cmd-text">بحث وأوامر سريعة...</span>
+            <kbd class="cmd-shortcut">Ctrl K</kbd>
+          </button>
+
+          <div class="auto-refresh-control">
+            <svg class="refresh-countdown-svg" viewBox="0 0 24 24" width="22" height="22" title="العد التنازلي للتحديث التلقائي">
+              <circle class="ring-bg" cx="12" cy="12" r="9" fill="none" stroke="rgba(56, 189, 248, 0.15)" stroke-width="2.5"></circle>
+              <circle class="ring-progress" id="refresh-ring-progress" cx="12" cy="12" r="9" fill="none" stroke="var(--accent-sky)" stroke-width="2.5" stroke-dasharray="56.54" stroke-dashoffset="0" stroke-linecap="round"></circle>
+            </svg>
+            <label class="switch-label" for="auto-refresh-toggle">
+              <input type="checkbox" id="auto-refresh-toggle" checked />
+              <span class="switch-slider"></span>
+              <span class="switch-text">تحديث تلقائي (5 ث)</span>
+            </label>
+          </div>
+
+          <button class="btn btn-secondary btn-icon-only" id="btn-open-shortcuts" title="دليل اختصارات لوحة المفاتيح (اضغط ؟)">
+            <span class="kbd-badge">؟</span>
+          </button>
+
+          <!-- Theme Toggle (Light / Dark Mode) -->
+          <button class="btn btn-secondary btn-icon-only" id="btn-theme-toggle" title="تبديل المظهر (نهاري / ليلي)" aria-label="تبديل المظهر النهاري والليلي">
+            <svg id="theme-toggle-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+
+          <button class="btn btn-secondary" id="btn-manual-refresh" title="تحديث القراءات فوراً (Ctrl+R)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="refresh-icon"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span>تحديث الآن</span>
+          </button>
+
+          <button class="btn btn-primary" id="btn-quick-connect">اتصال</button>
+        </div>
+      </header>
+
+      <!-- Alert / Notice Box (Dynamic) -->
+      <div id="global-alert" class="global-alert hidden" role="alert">
+        <span class="alert-icon" id="alert-icon"></span>
+        <div class="alert-content" id="alert-text"></div>
+        <button class="alert-close" id="alert-close" aria-label="إغلاق">✕</button>
+      </div>
+
+      <!-- Tab 1: Overview (نظرة عامة) -->
+      <section class="tab-pane active" id="pane-overview" role="tabpanel" aria-labelledby="tab-overview">
+        <!-- Disconnected Hero Welcome & Quick Connect Card (Shown when disconnected) -->
+        <div class="disconnected-hero-card" id="overview-disconnected-card">
+          <div class="dhc-icon-wrap">
+            <span class="dhc-icon">📡</span>
+          </div>
+          <div class="dhc-content">
+            <div class="dhc-title-row">
+              <h3 class="dhc-title">راوتر ZTE MC801A1 غير متصل حالياً</h3>
+              <span class="badge badge-danger">جلسة مغلقة</span>
+            </div>
+            <p class="dhc-desc">
+              سجّل الدخول إلى واجهة المودم المحلية لعرض سرعة التنزيل اللحظية، مراقبة قنوات 5G N78/N41، وتثبيت الترددات.
+            </p>
+            <div class="dhc-quick-form">
+              <div class="dhc-input-group">
+                <span class="dhc-input-prefix">🔑</span>
+                <input type="password" id="overview-quick-password" class="form-control dhc-pw-input" placeholder="كلمة مرور إدارة الراوتر" autocomplete="off" />
+              </div>
+              <button class="btn btn-primary" id="btn-overview-quick-connect">
+                <span>⚡️ تسجيل الدخول السريع</span>
+              </button>
+              <button class="btn btn-secondary" id="btn-goto-connection-tab">
+                <span>إعدادات متقدمة ←</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-Time Smart Signal Advisor (Shown when connected) -->
+        <div class="signal-advisor-card hidden" id="overview-advisor-card">
+          <div class="advisor-badge-wrap">
+            <span class="advisor-avatar">🧠</span>
+            <div class="advisor-title-box">
+              <div class="advisor-head">
+                <h4 class="advisor-title">المستشار الذكي لجودة الإشارة</h4>
+                <span class="badge badge-info" id="advisor-status-badge">تحليل حي</span>
+              </div>
+              <p class="advisor-message" id="advisor-message">جاري قراءة وتحليل ترددات الشبكة والضوضاء...</p>
+            </div>
+          </div>
+          <div class="advisor-action" id="advisor-action-wrap">
+            <button class="btn btn-secondary btn-sm" id="btn-advisor-action">
+              <span id="advisor-action-label">مساعد التوجيه الصوتي 🔊</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Network Banner -->
+        <div class="hero-banner">
+          <div class="hero-signals">
+            <div class="signal-meter">
+              <div class="signal-dial-box">
+                <svg class="signal-radar-dial" viewBox="0 0 64 64" width="62" height="62" title="مقياس الجودة الدائري">
+                  <circle class="dial-bg" cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="4"></circle>
+                  <circle class="dial-progress" id="hero-signal-dial" cx="32" cy="32" r="26" fill="none" stroke="var(--accent-sky)" stroke-width="4" stroke-dasharray="163.36" stroke-dashoffset="163.36" stroke-linecap="round"></circle>
+                </svg>
+                <div class="signal-bars-graphic" id="hero-signal-bars">
+                  <div class="bar bar-1"></div>
+                  <div class="bar bar-2"></div>
+                  <div class="bar bar-3"></div>
+                  <div class="bar bar-4"></div>
+                  <div class="bar bar-5"></div>
+                </div>
+              </div>
+              <div class="signal-rating">
+                <span class="signal-percent" id="hero-signal-pct">--</span>
+                <span class="signal-eval" id="hero-signal-eval">بانتظار الاتصال</span>
+              </div>
+            </div>
+
+            <div class="hero-details">
+              <div class="hero-badges">
+                <span class="badge badge-network" id="hero-net-type">--</span>
+                <span class="badge badge-provider" id="hero-provider">مزود الخدمة: --</span>
+                <span class="badge badge-band" id="hero-band">النطاق: --</span>
+              </div>
+              <div class="hero-wan">
+                <span class="wan-label">عنوان WAN IP:</span>
+                <span class="wan-value" id="hero-wan-ip">--</span>
+                <span class="apn-label">نقطة الوصول (APN):</span>
+                <span class="apn-value" id="hero-apn">--</span>
+                <span class="wan-toggle-wrap">
+                  <span class="badge" id="hero-wan-badge">--</span>
+                  <button class="btn btn-secondary btn-xs" id="btn-toggle-wan" title="قطع أو إعادة توصيل بيانات الشريحة">
+                    <span id="btn-toggle-wan-text">بيانات الشريحة</span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-meta">
+            <div class="meta-item">
+              <span class="meta-label">آخر تحديث:</span>
+              <span class="meta-value" id="hero-last-update">--:--:--</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">تجميع الترددات (CA):</span>
+              <span class="meta-value" id="hero-ca-status">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric KPI Cards Grid with Range Gauge Bars -->
+        <div class="kpi-grid">
+          <!-- RSRP Card -->
+          <div class="kpi-card" id="kpi-card-rsrp">
+            <div class="kpi-header">
+              <div class="flex items-center gap-1.5">
+                <span class="kpi-title">قوة إشارة الاستقبال (RSRP)</span>
+                <span class="info-tip-icon" title="RSRP: قوة إشارة البرج بالديسبل ميلي واط. (-70 ممتاز جداً، -90 جيد، أقل من -105 ضعيف)">ℹ️</span>
+              </div>
+              <span class="kpi-tag" id="tag-rsrp">--</span>
+            </div>
+            <div class="kpi-main">
+              <span class="kpi-value" id="val-rsrp">--</span>
+              <span class="kpi-unit">dBm</span>
+            </div>
+            <!-- Range Gauge Bar -->
+            <div class="kpi-gauge-wrap">
+              <div class="kpi-gauge-track">
+                <div class="kpi-gauge-fill" id="gauge-fill-rsrp"></div>
+                <div class="kpi-gauge-marker" id="marker-rsrp" style="right: 0%;"></div>
+              </div>
+              <div class="kpi-gauge-labels">
+                <span>ضعيف (-115)</span>
+                <span>متوسط (-100)</span>
+                <span>جيد (-90)</span>
+                <span>ممتاز (-70)</span>
+              </div>
+            </div>
+            <p class="kpi-desc">مقياس القوة المطلقة لإشارة البرج الواصلة للمودم.</p>
+          </div>
+
+          <!-- RSRQ Card -->
+          <div class="kpi-card" id="kpi-card-rsrq">
+            <div class="kpi-header">
+              <div class="flex items-center gap-1.5">
+                <span class="kpi-title">جودة الإشارة (RSRQ)</span>
+                <span class="info-tip-icon" title="RSRQ: جودة الإشارة ونقاؤها من التداخلات. (-10 أو أعلى ممتاز، -15 متوسط، أقل من -18 سيء)">ℹ️</span>
+              </div>
+              <span class="kpi-tag" id="tag-rsrq">--</span>
+            </div>
+            <div class="kpi-main">
+              <span class="kpi-value" id="val-rsrq">--</span>
+              <span class="kpi-unit">dB</span>
+            </div>
+            <!-- Range Gauge Bar -->
+            <div class="kpi-gauge-wrap">
+              <div class="kpi-gauge-track">
+                <div class="kpi-gauge-fill" id="gauge-fill-rsrq"></div>
+                <div class="kpi-gauge-marker" id="marker-rsrq" style="right: 0%;"></div>
+              </div>
+              <div class="kpi-gauge-labels">
+                <span>رديء (-20)</span>
+                <span>متوسط (-15)</span>
+                <span>جيد (-10)</span>
+                <span>نقي (-6)</span>
+              </div>
+            </div>
+            <p class="kpi-desc">مؤشر نقاوة الإشارة وتأثير التداخل من الأبراج المجاورة.</p>
+          </div>
+
+          <!-- SINR Card -->
+          <div class="kpi-card" id="kpi-card-sinr">
+            <div class="kpi-header">
+              <div class="flex items-center gap-1.5">
+                <span class="kpi-title">نسبة الإشارة إلى الضوضاء (SINR)</span>
+                <span class="info-tip-icon" title="SINR: نسبة نقاء الإشارة فوق الضوضاء. (+20 dB فما فوق يضمن أقصى سرعات 5G)">ℹ️</span>
+              </div>
+              <span class="kpi-tag" id="tag-sinr">--</span>
+            </div>
+            <div class="kpi-main">
+              <span class="kpi-value" id="val-sinr">--</span>
+              <span class="kpi-unit">dB</span>
+            </div>
+            <!-- Range Gauge Bar -->
+            <div class="kpi-gauge-wrap">
+              <div class="kpi-gauge-track">
+                <div class="kpi-gauge-fill" id="gauge-fill-sinr"></div>
+                <div class="kpi-gauge-marker" id="marker-sinr" style="right: 0%;"></div>
+              </div>
+              <div class="kpi-gauge-labels">
+                <span>ضوضاء (0)</span>
+                <span>مقبول (10)</span>
+                <span>جيد (18)</span>
+                <span>نقي (+25)</span>
+              </div>
+            </div>
+            <p class="kpi-desc">العامل الأهم لسرعة واستقرار نقل البيانات الحقيقي.</p>
+          </div>
+
+          <!-- Download Speed Card -->
+          <div class="kpi-card" id="kpi-card-speed-down">
+            <div class="kpi-header">
+              <span class="kpi-title">سرعة التنزيل الفعلية</span>
+              <div class="speed-status-header">
+                <span class="speed-pulse-dot" id="speed-down-dot" title="مؤشر تدفق التنزيل"></span>
+                <span class="kpi-badge-live">حساس الراوتر</span>
+              </div>
+            </div>
+            <div class="kpi-main speed-kpi-main">
+              <span class="kpi-value text-cyan-400" id="val-speed-down">غير متوفرة</span>
+              <div class="speed-activity-bars" id="speed-down-bars" title="نشاط تدفق حزم التنزيل">
+                <span class="bar bar-1"></span>
+                <span class="bar bar-2"></span>
+                <span class="bar bar-3"></span>
+                <span class="bar bar-4"></span>
+              </div>
+            </div>
+            <p class="kpi-desc">تُعرض فقط إذا أرجعها الراوتر؛ لا أرقام تجريبية أو وهمية.</p>
+          </div>
+
+          <!-- Upload Speed Card -->
+          <div class="kpi-card" id="kpi-card-speed-up">
+            <div class="kpi-header">
+              <span class="kpi-title">سرعة الرفع الفعلية</span>
+              <div class="speed-status-header">
+                <span class="speed-pulse-dot" id="speed-up-dot" title="مؤشر تدفق الرفع"></span>
+                <span class="kpi-badge-live">حساس الراوتر</span>
+              </div>
+            </div>
+            <div class="kpi-main speed-kpi-main">
+              <span class="kpi-value text-emerald-400" id="val-speed-up">غير متوفرة</span>
+              <div class="speed-activity-bars" id="speed-up-bars" title="نشاط تدفق حزم الرفع">
+                <span class="bar bar-1"></span>
+                <span class="bar bar-2"></span>
+                <span class="bar bar-3"></span>
+                <span class="bar bar-4"></span>
+              </div>
+            </div>
+            <p class="kpi-desc">تُعرض فقط إذا أرجعها الراوتر؛ لا أرقام تجريبية أو وهمية.</p>
+          </div>
+
+          <!-- Connected Devices Card -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-title">الأجهزة المتصلة</span>
+              <button class="kpi-link" id="link-to-devices">عرض الأجهزة ←</button>
+            </div>
+            <div class="kpi-main">
+              <span class="kpi-value text-amber-400" id="val-dev-count">0</span>
+              <span class="kpi-unit">جهاز</span>
+            </div>
+            <p class="kpi-desc" id="val-wifi-summary">حالة Wi-Fi: بانتظار القراءة</p>
+          </div>
+        </div>
+
+        <!-- Carrier Aggregation Info Block -->
+        <div class="content-card mt-6" id="ca-summary-block">
+          <div class="card-title-bar">
+            <h3 class="card-title">تفاصيل تجميع الترددات (Carrier Aggregation)</h3>
+            <span class="badge badge-secondary" id="ca-badge">--</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>الخلية / المكوّن</th>
+                  <th>النطاق (Band)</th>
+                  <th>معرّف الخلية (PCI)</th>
+                  <th>تردد القناة (EARFCN)</th>
+                </tr>
+              </thead>
+              <tbody id="ca-table-body">
+                <tr>
+                  <td colspan="4" class="text-center text-slate-400 py-4">لا توجد بيانات تجميع ترددات حالياً أو أن الجهاز غير متصل.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
+
+        <!-- Integrated Signal Telemetry & Audio Beacon -->
+        <div class="content-section-header mt-8 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">📡</span>
+            <h3 class="text-base font-bold text-white">تفاصيل الإشارة والترددات ومساعد التوجيه الصوتي</h3>
+          </div>
+          <span class="badge badge-info font-mono">4G LTE & 5G NR Live Telemetry</span>
+        </div>
+
+        <!-- Signal Audio Beeper & Antenna Alignment Tool -->
+        <div class="content-card mb-4 beeper-card">
+          <div class="card-title-bar">
+            <div class="flex items-center gap-2">
+              <span class="beeper-icon">🔊</span>
+              <h3 class="card-title text-cyan-300">مساعد توجيه وهوائي الراوتر الصوتي (Audio Signal Beacon)</h3>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-toggle-beeper">
+              <span id="btn-toggle-beeper-text">تشغيل التوجيه الصوتي 🔈</span>
+            </button>
+          </div>
+          <p class="text-xs text-slate-300 mt-2 mb-3">
+            أداة فريدة تصدر طنيناً صوتياً حياً ترتفع نغمته ويزداد تواتره كلما تحسنت الإشارة (RSRP/SINR). يمكنك حمل اللابتوب أو تحريك الراوتر بالقرب من النوافذ والزوايا لتحديد الموضع المثالي لأعلى سرعة دون الحاجة للنظر للشاشة.
+          </p>
+          <div class="beeper-meter-wrap">
+            <div class="beeper-meter-bar">
+              <div class="beeper-meter-fill" id="beeper-meter-fill" style="width: 0%;"></div>
+            </div>
+            <div class="beeper-stats">
+              <span>الإشارة الحالية: <strong id="beeper-rsrp-display">-- dBm</strong></span>
+              <span id="beeper-status-text">التوجيه الصوتي متوقف</span>
+            </div>
+          </div>
+          <!-- Beeper Equalizer & Volume Controls -->
+          <div class="beeper-controls mt-3">
+            <div class="beeper-eq-visualizer" id="beeper-eq">
+              <span class="eq-bar bar-1"></span>
+              <span class="eq-bar bar-2"></span>
+              <span class="eq-bar bar-3"></span>
+              <span class="eq-bar bar-4"></span>
+              <span class="eq-bar bar-5"></span>
+            </div>
+            <div class="beeper-vol-group">
+              <span class="text-xs text-slate-400">مستوى الصوت:</span>
+              <button class="btn btn-secondary btn-xs beeper-vol-btn" data-vol="low">منخفض 🔉</button>
+              <button class="btn btn-secondary btn-xs beeper-vol-btn active" data-vol="med">متوسط 🔊</button>
+              <button class="btn btn-secondary btn-xs beeper-vol-btn" data-vol="high">مرتفع 📢</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="details-grid">
+          <!-- 4G Signal Card -->
+          <div class="content-card">
+            <div class="card-title-bar">
+              <h3 class="card-title text-cyan-400">قراءات شبكة 4G LTE</h3>
+              <span class="badge badge-secondary" id="sig-4g-band">النطاق: --</span>
+            </div>
+            <div class="data-list">
+              <div class="data-row"><span class="label">قوة الإشارة (RSRP):</span><span class="val" id="sig-4g-rsrp">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">جودة الإشارة (RSRQ):</span><span class="val" id="sig-4g-rsrq">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">مؤشر القوة الكلية (RSSI):</span><span class="val" id="sig-4g-rssi">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">نسبة الإشارة للضوضاء (SINR/SNR):</span><span class="val" id="sig-4g-snr">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">معرّف الخلية الفعلي (PCI):</span><span class="val font-mono" id="sig-4g-pci">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">تردد القناة (EARFCN):</span><span class="val font-mono" id="sig-4g-earfcn">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">عرض النطاق (Bandwidth):</span><span class="val" id="sig-4g-bw">غير متوفرة</span></div>
+            </div>
+          </div>
+
+          <!-- 5G Signal Card -->
+          <div class="content-card">
+            <div class="card-title-bar">
+              <h3 class="card-title text-emerald-400">قراءات شبكة 5G NR</h3>
+              <span class="badge badge-secondary" id="sig-5g-band">النطاق: --</span>
+            </div>
+            <div class="data-list">
+              <div class="data-row"><span class="label">قوة إشارة 5G (RSRP):</span><span class="val" id="sig-5g-rsrp">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">نسبة إشارة 5G للضوضاء (SINR):</span><span class="val" id="sig-5g-sinr">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">معرّف خلية 5G (PCI):</span><span class="val font-mono" id="sig-5g-pci">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">تردد قناة 5G (ARFCN):</span><span class="val font-mono" id="sig-5g-earfcn">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">نطاق 5G النشط (Action Band):</span><span class="val" id="sig-5g-action-band">غير متوفرة</span></div>
+            </div>
+          </div>
+
+          <!-- Base Station & Identity Card -->
+          <div class="content-card">
+            <div class="card-title-bar">
+              <h3 class="card-title text-indigo-400">بيانات البرج ومعرّف الخلية</h3>
+            </div>
+            <div class="data-list">
+              <div class="data-row"><span class="label">رقم الخلية (Cell ID):</span><span class="val font-mono" id="sig-cell-id">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">معرّف المحطة (eNB ID):</span><span class="val font-mono" id="sig-enb-id">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">نوع الشبكة الحالية:</span><span class="val" id="sig-network-type">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">اسم مزود الخدمة:</span><span class="val" id="sig-provider">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">حالة تجميع الترددات:</span><span class="val" id="sig-ca-status">غير متوفرة</span></div>
+            </div>
+          </div>
+
+          <!-- Hardware & Sensors Card -->
+          <div class="content-card">
+            <div class="card-title-bar">
+              <h3 class="card-title text-amber-400">بيانات العتاد وحرارة المودم</h3>
+            </div>
+            <div class="data-list">
+              <div class="data-row"><span class="label">حرارة مودم 4G:</span><span class="val" id="hw-temp-4g">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">حرارة مودم 5G:</span><span class="val" id="hw-temp-5g">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">إصدار الفيرموير الداخلي:</span><span class="val font-mono" id="hw-fw-ver">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">عنوان WAN المباشر:</span><span class="val font-mono" id="hw-wan-ip">غير متوفرة</span></div>
+              <div class="data-row"><span class="label">نقطة الوصول (APN):</span><span class="val" id="hw-apn">غير متوفرة</span></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Tab 2: Connected Devices (الأجهزة المتصلة) - Enhanced with Import & Profiles -->
+      <section class="tab-pane" id="pane-devices" role="tabpanel" aria-labelledby="tab-devices">
+        <div class="devices-toolbar">
+          <div class="toolbar-title-group">
+            <h3 class="text-lg font-bold text-white">إدارة الأجهزة المتصلة (<span id="devices-count-header">0</span>)</h3>
+            <span class="text-xs text-slate-400">اكتشاف واستيراد وتسمية الأجهزة المتصلة بالشبكة</span>
+          </div>
+
+          <!-- Action buttons for Import & Export -->
+          <div class="toolbar-actions">
+            <button class="btn btn-primary btn-sm" id="btn-scan-local-net" title="مسح عميق للشبكة المحلية (ARP/Subnet Scan) لاكتشاف كافة الأجهزة المتصلة فوراً دون اشتراط تسجيل الدخول">
+              <span id="btn-scan-net-text">🔍 مسح عميق للشبكة (ARP)</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btn-import-this-device" title="التعرف التلقائي على هذا الحاسوب واستيراده">
+              <span>⭐️ استيراد هذا الحاسوب</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btn-open-manual-import" title="إضافة جهاز يدوياً">
+              <span>➕ إضافة جهاز يدوي</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btn-export-devices" title="تصدير قائمة الأجهزة كملف JSON">
+              <span>📥 تصدير القائمة</span>
+            </button>
+            <label class="btn btn-secondary btn-sm file-input-label" title="استيراد قائمة أجهزة من ملف JSON">
+              <span>📤 استيراد ملف</span>
+              <input type="file" id="input-import-file" accept=".json" style="display:none;" />
+            </label>
+            <button class="btn btn-secondary btn-sm" id="btn-refresh-devices" title="تحديث القائمة من الراوتر والشبكة">
+              <span>🔄 تحديث الأجهزة</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Category Filter Chips -->
+        <div class="device-filter-chips mt-3 mb-2" id="device-filter-chips">
+          <button class="filter-chip active" data-filter="all">الكل (<span id="chip-count-all">0</span>)</button>
+          <button class="filter-chip" data-filter="this-device">⭐️ هذا الحاسوب (<span id="chip-count-this">0</span>)</button>
+          <button class="filter-chip" data-filter="wifi">📶 Wi-Fi (<span id="chip-count-wifi">0</span>)</button>
+          <button class="filter-chip" data-filter="lan">🔌 سلكي LAN (<span id="chip-count-lan">0</span>)</button>
+          <button class="filter-chip" data-filter="apple">🍎 Apple (<span id="chip-count-apple">0</span>)</button>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="device-search-bar mb-3">
+          <div class="search-input-wrap">
+            <input type="text" id="device-search-input" class="form-control" placeholder="🔍 بحث عن جهاز بالاسم، عنوان IP، عنوان MAC، أو الشركة المصنعة... (Ctrl+F)" />
+            <button class="search-clear-btn hidden" id="btn-clear-device-search" title="مسح نص البحث">✕</button>
+          </div>
+        </div>
+
+        <!-- Scan Status & Summary Badge -->
+        <div id="device-summary-banner" class="scan-status-banner mb-4">
+          <div class="flex items-center gap-2">
+            <span class="pulse-indicator"></span>
+            <span id="device-summary-text" class="text-xs font-semibold text-cyan-300">جاري قراءة الأجهزة المتصلة بالشبكة...</span>
+          </div>
+          <span id="device-scan-time" class="text-xs text-slate-400"></span>
+        </div>
+
+        <!-- Devices Table Card -->
+        <div class="content-card">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>الجهاز / التسمية</th>
+                  <th>الشركة المصنعة</th>
+                  <th>عنوان IP</th>
+                  <th>عنوان MAC</th>
+                  <th>الاتصال</th>
+                  <th>النوع</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="devices-table-body">
+                <tr id="devices-empty-row">
+                  <td colspan="7" class="empty-cell">
+                    <div class="empty-state">
+                      <div class="empty-icon">📱</div>
+                      <h4>لا توجد أجهزة متصلة مسجلة</h4>
+                      <p>اضغط على «فحص الأجهزة» أو تأكد من اتصال الراوتر لجلب القائمة.</p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 3: Connection & Wi-Fi Settings (الاتصال و Wi-Fi) -->
+      <section class="tab-pane" id="pane-wifi" role="tabpanel" aria-labelledby="tab-wifi">
+        <!-- Sub-section 1: Gateway Connection & Router Access -->
+        <div class="content-card mb-6">
+          <div class="card-title-bar">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🔌</span>
+              <h3 class="card-title">بوابة تسجيل الدخول إلى الراوتر</h3>
+            </div>
+            <span class="text-xs text-slate-400">ZTE Local Gateway 192.168.0.1</span>
+          </div>
+
+          <!-- Privacy Notice Banner -->
+          <div class="notice-box security mb-6">
+            <div class="notice-icon">🔒</div>
+            <div class="notice-text">
+              <strong>سياسة الخصوصية والأمان:</strong> يتصل التطبيق بعنوان الراوتر داخل شبكتك المحلية فقط ويرفض أي عناوين خارجية. لا تُحفظ كلمة المرور على القرص نهائياً ولا يتم إرسال أي بيانات لجلساتك إلى خارج حاسوبك، بل تُحفظ مؤقتاً في ذاكرة الجسر الحية (RAM) فقط وتُمحى فوراً عند قطع الاتصال أو إغلاق البرنامج.
+            </div>
+          </div>
+
+          <form id="form-connect" class="connect-form" onsubmit="return false;">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="form-group">
+                <label for="input-router-ip">عنوان IP للراوتر:</label>
+                <div class="input-wrapper">
+                  <input type="text" id="input-router-ip" class="form-control" value="192.168.0.1" placeholder="192.168.0.1" required />
+                  <span class="input-hint">العنوان الافتراضي لراوتر ZTE هو 192.168.0.1</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="input-password">كلمة مرور إدارة الراوتر:</label>
+                <div class="input-wrapper password-wrapper">
+                  <input type="password" id="input-password" class="form-control" placeholder="أدخل كلمة المرور الخاصة بواجهة الراوتر" required autocomplete="off" />
+                  <button type="button" class="btn-toggle-pw" id="btn-toggle-pw" title="إظهار / إخفاء كلمة المرور">👁️</button>
+                  <span class="input-hint">كلمة المرور الخاصة بصفحة الدخول للراوتر (غير كلمة مرور الـ Wi-Fi). لن تُحفظ.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions mt-4">
+              <button type="button" class="btn btn-primary btn-lg" id="btn-connect-action">
+                <span class="btn-spinner hidden" id="spinner-connect"></span>
+                <span id="btn-connect-label">اتصال بالراوتر</span>
+              </button>
+
+              <button type="button" class="btn btn-danger btn-lg hidden" id="btn-disconnect-action">
+                <span>قطع الاتصال ومسح الجلسة</span>
+              </button>
+
+              <button type="button" class="btn btn-secondary" id="btn-check-bridge">
+                <span>فحص الجسر المحلي</span>
+              </button>
+
+              <button class="btn btn-danger" id="btn-open-reboot-modal" title="إعادة تشغيل راوتر ZTE MC801A1">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                <span>إعادة التشغيل (Reboot)</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Collapsible/Compact Advanced Bridge Settings -->
+          <div class="settings-grid mt-4 pt-4 border-t border-slate-700/40">
+            <div class="setting-item">
+              <label for="setting-model">طراز الجهاز المدعوم:</label>
+              <input type="text" id="setting-model" class="form-control" value="ZTE MC801A1" disabled />
+            </div>
+            <div class="setting-item">
+              <label for="setting-username">اسم المستخدم:</label>
+              <input type="text" id="setting-username" class="form-control" value="user" placeholder="user" />
+            </div>
+            <div class="setting-item">
+              <label for="setting-bridge-port">منفذ الجسر المحلي:</label>
+              <input type="number" id="setting-bridge-port" class="form-control" value="5188" disabled />
+            </div>
+          </div>
+          <div class="mt-3">
+            <button class="btn btn-secondary btn-sm" id="btn-save-settings">حفظ إعدادات الاتصال محلياً</button>
+          </div>
+        </div>
+
+        <!-- Sub-section 2: Wi-Fi Wireless Configuration -->
+        <!-- Wi-Fi Status & Toggle Bar -->
+        <div class="wifi-header-card content-card mb-4">
+          <div class="wifi-status-flex">
+            <div class="wifi-status-info">
+              <div class="flex items-center gap-2">
+                <span class="status-dot" id="wifi-dot"></span>
+                <h3 class="text-base font-bold text-white">حالة بث شبكة Wi-Fi</h3>
+                <span class="badge" id="wifi-badge">جاري الفحص...</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">التحكم في تشغيل أو إيقاف بث شبكة Wi-Fi اللاسلكية في الراوتر.</p>
+            </div>
+            <div class="wifi-toggle-actions">
+              <button class="btn btn-secondary btn-sm" id="btn-toggle-wifi-state">
+                <span id="btn-toggle-wifi-text">تبديل حالة Wi-Fi</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Wi-Fi Configuration Card -->
+          <div class="content-card">
+            <div class="card-title-bar">
+              <h3 class="card-title text-cyan-400">تعديل اسم الشبكة وكلمة المرور</h3>
+              <span class="badge badge-info">تحكم مباشر</span>
+            </div>
+
+            <form id="form-wifi-settings" class="mt-4" onsubmit="return false;">
+              <div class="form-group mb-4">
+                <label for="input-wifi-ssid" class="form-label">اسم شبكة Wi-Fi (SSID):</label>
+                <input type="text" id="input-wifi-ssid" class="form-control" placeholder="اسم الشبكة اللاسلكية" required />
+                <span class="text-xs text-slate-400 mt-1 block">الاسم الذي يظهر عند البحث عن الشبكة من الجوالات والحواسب.</span>
+              </div>
+
+              <div class="form-group mb-4">
+                <label for="input-wifi-password" class="form-label">كلمة مرور Wi-Fi الجديدة (WPA-PSK Key):</label>
+                <div class="input-with-action">
+                  <input type="password" id="input-wifi-password" class="form-control font-mono" placeholder="اتركه فارغاً إذا لم ترغب بتغييرها (8 أحرف فأكثر)" minlength="8" />
+                  <button type="button" class="btn-action-inline" id="btn-toggle-wifi-pw-visibility" title="إظهار/إخفاء كلمة المرور">👁️</button>
+                  <button type="button" class="btn-action-inline" id="btn-gen-wifi-pw" title="توليد كلمة مرور قوية">🎲</button>
+                </div>
+                <span class="text-xs text-slate-400 mt-1 block">يجب ألا تقل عن 8 خانات. اترك الحقل فارغاً للإبقاء على كلمة المرور الحالية.</span>
+              </div>
+
+              <div class="form-check mb-4">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="check-hide-ssid" />
+                  <span>إخفاء اسم الشبكة (Hide SSID) لمنع ظهورها في قائمة البحث العامة</span>
+                </label>
+              </div>
+
+              <div class="form-actions mt-4">
+                <button type="submit" class="btn btn-primary" id="btn-save-wifi-settings">
+                  <span>💾 حفظ وتطبيق إعدادات Wi-Fi</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Wi-Fi Specifications Card -->
+          <div class="content-card">
+            <div class="card-title-bar">
+              <h3 class="card-title text-slate-200">معلومات وتقنيات Wi-Fi في الراوتر</h3>
+            </div>
+
+            <div class="data-list mt-3">
+              <div class="data-row">
+                <span class="label">اسم الشبكة الحالي:</span>
+                <span class="val font-semibold text-cyan-300" id="wifi-ssid">غير متوفر</span>
+              </div>
+              <div class="data-row">
+                <span class="label">حالة البث اللاسلكي:</span>
+                <span class="val" id="wifi-status-text">--</span>
+              </div>
+              <div class="data-row">
+                <span class="label">بث اسم الشبكة (Broadcast):</span>
+                <span class="val" id="wifi-broadcast">مرئي (Visible)</span>
+              </div>
+              <div class="data-row">
+                <span class="label">نظام التشفير والأمان:</span>
+                <span class="val font-mono" id="wifi-security">WPA2/WPA3-PSK</span>
+              </div>
+              <div class="data-row">
+                <span class="label">نظام المصادقة:</span>
+                <span class="val" id="wifi-auth-mode">مشفّر (Protected)</span>
+              </div>
+              <div class="data-row">
+                <span class="label">ترددات البث المدعومة:</span>
+                <span class="val">Wi-Fi 6 (802.11ax) ثنائي النطاق 2.4G & 5G</span>
+              </div>
+            </div>
+
+            <div class="notice-box info mt-4">
+              <div class="notice-icon">💡</div>
+              <div class="notice-text text-xs">
+                تغيير اسم الشبكة أو كلمة المرور سيتطلب إعادة ربط جميع أجهزتك المنزلية بالاسم وكلمة المرور الجديدة.
+              </div>
+            </div>
+          </div>
+
+          <!-- Modern Wi-Fi QR Code Guest Share Card -->
+          <div class="content-card wifi-qr-card md:col-span-2" id="wifi-qr-card">
+            <div class="card-title-bar">
+              <div class="flex items-center gap-2">
+                <span class="qr-header-icon">📱</span>
+                <h3 class="card-title text-cyan-400">مسح سريع للاتصال بكاميرا الجوال (Wi-Fi QR)</h3>
+              </div>
+              <span class="badge badge-success">اتصال فوري بدون كتابة كلمة المرور</span>
+            </div>
+            <div class="wifi-qr-body">
+              <div class="qr-canvas-box" id="qr-canvas-box">
+                <!-- Dynamically rendered high-tech SVG QR Code with radar sweep -->
+                <div class="qr-frame">
+                  <div class="qr-scan-line"></div>
+                  <div id="qr-svg-container" class="qr-svg-container"></div>
+                </div>
+              </div>
+              <div class="qr-info-box">
+                <div class="qr-meta-row">
+                  <span class="qr-meta-label">الشبكة:</span>
+                  <span class="qr-meta-val font-semibold text-cyan-300" id="qr-ssid-val">--</span>
+                </div>
+                <div class="qr-meta-row">
+                  <span class="qr-meta-label">التشفير:</span>
+                  <span class="qr-meta-val font-mono" id="qr-sec-val">WPA2/WPA3</span>
+                </div>
+                <p class="qr-desc">وجّه كاميرا هاتفك الذكي نحو الرمز للاتصال فوراً بشبكة راوتر ZTE MC801A1 دون الحاجة لكتابة المفتاح يدوياً.</p>
+                <div class="qr-action-btns">
+                  <button class="btn btn-secondary btn-sm" id="btn-copy-wifi-pw">
+                    <span>📋 نسخ كلمة المرور</span>
+                  </button>
+                  <button class="btn btn-secondary btn-sm" id="btn-copy-wifi-qr-string">
+                    <span>🔗 نسخ نص كود Wi-Fi</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 4: Bands & Router Controls (النطاقات والترددات والخلية) -->
+      <section class="tab-pane" id="pane-bands" role="tabpanel" aria-labelledby="tab-bands">
+        <!-- Live Status Overview Bar -->
+        <div class="content-card mb-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 class="text-base font-bold text-white">إدارة النطاقات والترددات وقفل الخلية</h3>
+              <p class="text-xs text-slate-400 mt-1">تثبيت وتوجيه راوتر ZTE MC801A1 نحو أفضل الأبراج والترددات للحصول على أعلى سرعة واستقرار.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="btn btn-secondary btn-sm" id="btn-refresh-band-settings">
+                <span>🔄 قراءة الإعدادات الحالية</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="band-status-summary-grid mt-4">
+            <div class="summary-pill-card">
+              <span class="pill-label">نمط الشبكة:</span>
+              <span class="pill-val badge badge-info" id="badge-curr-mode">تلقائي</span>
+            </div>
+            <div class="summary-pill-card">
+              <span class="pill-label">نطاق 5G النشط:</span>
+              <span class="pill-val text-emerald-400 font-mono" id="val-curr-5g-band">غير متوفر</span>
+            </div>
+            <div class="summary-pill-card">
+              <span class="pill-label">نطاق 4G النشط:</span>
+              <span class="pill-val text-cyan-400 font-mono" id="val-curr-4g-band">غير متوفر</span>
+            </div>
+            <div class="summary-pill-card">
+              <span class="pill-label">قفل الخلية الحالي:</span>
+              <span class="pill-val text-amber-400 font-mono" id="val-curr-cell-lock">تلقائي (غير مقفل)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 1: Network Mode Selection -->
+        <div class="content-card mb-4">
+          <div class="card-title-bar">
+            <h3 class="card-title text-indigo-400">1. اختيار نمط الشبكة (Network Mode)</h3>
+            <span class="badge badge-secondary">تحديد الأولوية</span>
+          </div>
+
+          <div class="mode-selection-grid mt-3">
+            <label class="mode-card" id="mode-card-auto">
+              <input type="radio" name="net-mode-radio" value="auto" checked />
+              <div class="mode-card-content">
+                <div class="mode-title">تلقائي (5G / 4G Auto) ⭐️</div>
+                <div class="mode-desc">الوضع الموصى به: يتصل بـ 5G تلقائياً وينتقل لـ 4G عند الحاجة لضمان استمرار الاتصال.</div>
+              </div>
+            </label>
+
+            <label class="mode-card" id="mode-card-5g">
+              <input type="radio" name="net-mode-radio" value="5g_only" />
+              <div class="mode-card-content">
+                <div class="mode-title">الجيل الخامس فقط (5G Only) ⚡️</div>
+                <div class="mode-desc">إجبار المودم على الاتصال بشبكة 5G دون الرجوع للجيل الرابع مطلقاً، ممتاز إذا كانت تغطية 5G ممتازة.</div>
+              </div>
+            </label>
+
+            <label class="mode-card" id="mode-card-4g">
+              <input type="radio" name="net-mode-radio" value="4g_only" />
+              <div class="mode-card-content">
+                <div class="mode-title">الجيل الرابع فقط (4G LTE Only) 🛡️</div>
+                <div class="mode-desc">تثبيت الراوتر على 4G LTE فقط، مفيد لتفادي التقطيع في المناطق التي تعاني من تذبذب إشارة 5G.</div>
+              </div>
+            </label>
+          </div>
+
+          <div class="form-actions mt-3 flex justify-end">
+            <button class="btn btn-primary btn-sm" id="btn-apply-network-mode">
+              <span>تطبيق نمط الشبكة</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Section 2: 5G & 4G Band Locking Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <!-- 5G NR Band Lock -->
+          <div class="content-card">
+            <div class="card-title-bar">
+              <h3 class="card-title text-emerald-400">2. قفل نطاقات 5G NR</h3>
+              <span class="badge badge-success">5G Lock</span>
+            </div>
+            <p class="text-xs text-slate-300 mt-1 mb-3">حدد النطاقات التي ترغب في تمكين الراوتر من الاتصال بها أو قفلها:</p>
+
+            <div class="bands-checkbox-grid" id="grid-5g-bands">
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="78" class="check-5g-band" checked />
+                <span class="band-num font-mono">N78</span>
+                <span class="band-freq">3500 MHz (الأسرع والأكثر شيوعاً)</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="41" class="check-5g-band" checked />
+                <span class="band-num font-mono">N41</span>
+                <span class="band-freq">2500 MHz (سعة عالية وتغطية واسعة)</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="77" class="check-5g-band" checked />
+                <span class="band-num font-mono">N77</span>
+                <span class="band-freq">3700 MHz (C-Band 5G)</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="1" class="check-5g-band" checked />
+                <span class="band-num font-mono">N1</span>
+                <span class="band-freq">2100 MHz (تغطية متقدمة)</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="3" class="check-5g-band" checked />
+                <span class="band-num font-mono">N3</span>
+                <span class="band-freq">1800 MHz (سرعة وتغطية متوازنة)</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="28" class="check-5g-band" checked />
+                <span class="band-num font-mono">N28</span>
+                <span class="band-freq">700 MHz (مدى تغطية واسع جداً واختراق)</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="79" class="check-5g-band" />
+                <span class="band-num font-mono">N79</span>
+                <span class="band-freq">4700 MHz (تردد فائق)</span>
+              </label>
+            </div>
+
+            <div class="band-actions-bar mt-4">
+              <button class="btn btn-emerald btn-sm" id="btn-apply-5g-lock">
+                <span>تطبيق قفل 5G</span>
+              </button>
+              <button class="btn btn-secondary btn-sm" id="btn-select-all-5g">
+                <span>تحديد الكل</span>
+              </button>
+              <button class="btn btn-secondary btn-sm" id="btn-reset-5g-lock">
+                <span>فك القفل (تلقائي)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 4G LTE Band Lock -->
+          <div class="content-card">
+            <div class="card-title-bar">
+              <h3 class="card-title text-cyan-400">3. قفل نطاقات 4G LTE</h3>
+              <span class="badge badge-info">LTE Lock</span>
+            </div>
+            <p class="text-xs text-slate-300 mt-1 mb-3">اختر ترددات الجيل الرابع المسموحة للمودم وتجميع الترددات (CA):</p>
+
+            <div class="bands-checkbox-grid" id="grid-4g-bands">
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="1" class="check-4g-band" checked />
+                <span class="band-num font-mono">B1</span>
+                <span class="band-freq">2100 MHz FDD</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="3" class="check-4g-band" checked />
+                <span class="band-num font-mono">B3</span>
+                <span class="band-freq">1800 MHz FDD</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="7" class="check-4g-band" checked />
+                <span class="band-num font-mono">B7</span>
+                <span class="band-freq">2600 MHz FDD</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="8" class="check-4g-band" checked />
+                <span class="band-num font-mono">B8</span>
+                <span class="band-freq">900 MHz FDD</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="20" class="check-4g-band" checked />
+                <span class="band-num font-mono">B20</span>
+                <span class="band-freq">800 MHz FDD</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="28" class="check-4g-band" checked />
+                <span class="band-num font-mono">B28</span>
+                <span class="band-freq">700 MHz FDD</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="38" class="check-4g-band" checked />
+                <span class="band-num font-mono">B38</span>
+                <span class="band-freq">2600 MHz TDD</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="40" class="check-4g-band" checked />
+                <span class="band-num font-mono">B40</span>
+                <span class="band-freq">2300 MHz TDD</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="41" class="check-4g-band" checked />
+                <span class="band-num font-mono">B41</span>
+                <span class="band-freq">2500 MHz TDD</span>
+              </label>
+              <label class="band-checkbox-item">
+                <input type="checkbox" value="42" class="check-4g-band" checked />
+                <span class="band-num font-mono">B42</span>
+                <span class="band-freq">3500 MHz TDD</span>
+              </label>
+            </div>
+
+            <div class="band-actions-bar mt-4">
+              <button class="btn btn-primary btn-sm" id="btn-apply-4g-lock">
+                <span>تطبيق قفل 4G</span>
+              </button>
+              <button class="btn btn-secondary btn-sm" id="btn-select-all-4g">
+                <span>تحديد الكل</span>
+              </button>
+              <button class="btn btn-secondary btn-sm" id="btn-reset-4g-lock">
+                <span>فك القفل (Auto)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Cell Lock (PCI & EARFCN) -->
+        <div class="content-card max-w-2xl mb-4">
+          <div class="card-title-bar">
+            <h3 class="card-title text-amber-400">4. قفل الخلية وتثبيت البرج (Cell Lock - PCI & EARFCN)</h3>
+            <span class="badge badge-warning">تثبيت دقيق</span>
+          </div>
+          <p class="text-xs text-slate-300 mt-1 mb-3">
+            قفل الراوتر على برج وخلية محددة يمنع التنقل العشوائي بين الأبراج المزدحمة ويثبت مؤشرات RSRP و SINR على أعلى كفاءة.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="form-group">
+              <label for="input-cell-pci" class="form-label">معرف الخلية الفيزيائي (PCI):</label>
+              <input type="number" id="input-cell-pci" class="form-control font-mono" placeholder="مثال: 124" />
+            </div>
+            <div class="form-group">
+              <label for="input-cell-earfcn" class="form-label">رقم القناة الترددية (EARFCN):</label>
+              <input type="number" id="input-cell-earfcn" class="form-control font-mono" placeholder="مثال: 1650" />
+            </div>
+          </div>
+
+          <div class="band-actions-bar mt-4">
+            <button class="btn btn-warning btn-sm" id="btn-apply-cell-lock">
+              <span>🔒 تطبيق قفل الخلية</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btn-clear-cell-lock">
+              <span>🔓 إلغاء قفل الخلية</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btn-copy-live-cell">
+              <span>📋 نسخ قيم البرج الحالي</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 5: SMS Messages (الرسائل النصية ورموز التحقق) -->
+      <section class="tab-pane" id="pane-sms" role="tabpanel" aria-labelledby="tab-sms">
+        <div class="content-card mb-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 class="text-base font-bold text-white">صندوق رسائل الشريحة (SMS) (<span id="sms-count-header">0</span>)</h3>
+              <p class="text-xs text-slate-400 mt-1">قراءة رسائل مشغلي الاتصالات ورموز التحقق (OTP) وتنبيهات الباقات والرصيد من شريحة SIM مباشرة.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="btn btn-primary btn-sm" id="btn-refresh-sms">
+                <span>🔄 جلب الرسائل</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- SMS Search / Filter Bar -->
+          <div class="sms-search-bar mt-4">
+            <div class="search-input-wrap">
+              <input type="text" id="sms-search-input" class="form-control" placeholder="🔍 بحث في الرسائل برقم المرسل، اسم المشغل، أو محتوى الرسالة... (Ctrl+F)" />
+              <button class="search-clear-btn hidden" id="btn-clear-sms-search" title="مسح نص البحث">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SMS Messages List Container -->
+        <div class="sms-messages-container" id="sms-list-container">
+          <div class="empty-state py-8" id="sms-empty-state">
+            <div class="empty-icon">✉️</div>
+            <h4>لا توجد رسائل مسجلة</h4>
+            <p>اضغط على «جلب الرسائل» لقراءة الرسائل الواردة إلى شريحة الراوتر.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 6: Advanced Settings (إعدادات متقدمة) -->
+      <section class="tab-pane" id="pane-advanced" role="tabpanel" aria-labelledby="tab-advanced">
+        <!-- Advanced Settings Header Hero -->
+        <div class="section-hero-card">
+          <div class="shc-icon-wrap">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </div>
+          <div class="shc-content">
+            <div class="shc-title-row">
+              <h2 class="shc-title">الإعدادات المتقدمة (Advanced Settings)</h2>
+              <span class="badge badge-info">ZTE MC801A1 Hub</span>
+            </div>
+            <p class="shc-desc">
+              إدارة متكاملة لخصائص راوتر ZTE: أوضاع حفظ الطاقة، خادم DHCP والشبكة المحلية، جدار الحماية وتوجيه المنافذ، التحديثات التلقائية، وأدوات الصيانة والتشخيص المباشر.
+            </p>
+          </div>
+          <div class="shc-actions">
+            <button class="btn btn-secondary btn-sm" id="btn-refresh-advanced">
+              <span>🔄 قراءة الإعدادات</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Advanced Sub-Navigation Segmented Pills Bar -->
+        <div class="adv-subnav-bar" role="tablist">
+          <button class="adv-subnav-btn active" data-subtab="adv-power" id="btn-subtab-power" role="tab" aria-selected="true">
+            <span class="adv-btn-icon">⚡</span>
+            <span class="adv-btn-label">حفظ الطاقة</span>
+          </button>
+          <button class="adv-subnav-btn" data-subtab="adv-router" id="btn-subtab-router" role="tab" aria-selected="false">
+            <span class="adv-btn-icon">🌐</span>
+            <span class="adv-btn-label">إعدادات الروتر</span>
+          </button>
+          <button class="adv-subnav-btn" data-subtab="adv-security" id="btn-subtab-security" role="tab" aria-selected="false">
+            <span class="adv-btn-icon">🛡️</span>
+            <span class="adv-btn-label">إعدادات الحماية</span>
+          </button>
+          <button class="adv-subnav-btn" data-subtab="adv-update" id="btn-subtab-update" role="tab" aria-selected="false">
+            <span class="adv-btn-icon">🔄</span>
+            <span class="adv-btn-label">إعدادات التحديث</span>
+          </button>
+          <button class="adv-subnav-btn" data-subtab="adv-tools" id="btn-subtab-tools" role="tab" aria-selected="false">
+            <span class="adv-btn-icon">⚙️</span>
+            <span class="adv-btn-label">الصيانة وأخرى</span>
+          </button>
+        </div>
+
+        <!-- Sub-Pane 1: حفظ الطاقة (Power Saving) -->
+        <div class="adv-subpane active" id="subpane-adv-power" role="tabpanel">
+          <div class="dashboard-grid">
+            <!-- Sleep Friendly Mode Card -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🌙</span>
+                  <div>
+                    <h3 class="card-title">وضع ودية للنوم (Sleep Friendly Mode)</h3>
+                    <p class="card-subtitle">تخفيض استهلاك الطاقة وإيقاف النطاقات الثانوية لتقليل الحرارة أثناء فترات الخمول والليل.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="radio-card-grid mb-4">
+                  <label class="radio-card">
+                    <input type="radio" name="adv-sleep-mode" value="always_on" id="adv-sleep-always" checked />
+                    <div class="radio-card-content">
+                      <div class="radio-card-title">
+                        <span class="radio-indicator"></span>
+                        <span class="font-bold">دائماً متاح (Always On)</span>
+                      </div>
+                      <p class="radio-card-desc">الراوتر يعمل بأعلى طاقة وبث مستمر على مدار الساعة دون توفير الطاقة.</p>
+                    </div>
+                  </label>
+
+                  <label class="radio-card">
+                    <input type="radio" name="adv-sleep-mode" value="scheduled" id="adv-sleep-scheduled" />
+                    <div class="radio-card-content">
+                      <div class="radio-card-title">
+                        <span class="radio-indicator"></span>
+                        <span class="font-bold">مجدولة قبالة (Scheduled Eco Sleep)</span>
+                      </div>
+                      <p class="radio-card-desc">الدخول في وضع توفير الطاقة تلقائياً خلال ساعات الليل المحددة.</p>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="form-row adv-schedule-hours" id="adv-sleep-hours-row">
+                  <div class="form-group flex-1">
+                    <label for="adv-sleep-start-time">بدء وضع النوم (من الساعة):</label>
+                    <input type="time" id="adv-sleep-start-time" class="form-control" value="23:00" />
+                  </div>
+                  <div class="form-group flex-1">
+                    <label for="adv-sleep-end-time">انتهاء وضع النوم (إلى الساعة):</label>
+                    <input type="time" id="adv-sleep-end-time" class="form-control" value="06:00" />
+                  </div>
+                </div>
+
+                <div class="form-actions mt-4">
+                  <button class="btn btn-primary" id="btn-save-power-sleep">
+                    <span>تفعيل وحفظ وضع الطاقة</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Wi-Fi Wakeup Settings Card -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">⚡</span>
+                  <div>
+                    <h3 class="card-title">إعدادات إيقاظ Wi-Fi (Wi-Fi Wakeup Settings)</h3>
+                    <p class="card-subtitle">الاستيقاظ الذكي للترددات عند محاولة اتصال أحد الأجهزة المنزلية المقترنة مسبقاً.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="radio-card-grid mb-4">
+                  <label class="radio-card">
+                    <input type="radio" name="adv-wifi-wakeup" value="1" id="adv-wifi-wakeup-on" />
+                    <div class="radio-card-content">
+                      <div class="radio-card-title">
+                        <span class="radio-indicator"></span>
+                        <span class="font-bold">تفعيل (Enabled)</span>
+                      </div>
+                      <p class="radio-card-desc">استيقاظ بث Wi-Fi تلقائياً وبسرعة فائقة عند اكتشاف طلب اتصال من جهاز مقترن.</p>
+                    </div>
+                  </label>
+
+                  <label class="radio-card">
+                    <input type="radio" name="adv-wifi-wakeup" value="0" id="adv-wifi-wakeup-off" checked />
+                    <div class="radio-card-content">
+                      <div class="radio-card-title">
+                        <span class="radio-indicator"></span>
+                        <span class="font-bold">تعطيل (Disabled)</span>
+                      </div>
+                      <p class="radio-card-desc">إبقاء إشارة البث على حالتها القياسية دون تفعيل ميزة الاستيقاظ الذاتي.</p>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="form-actions mt-4">
+                  <button class="btn btn-primary" id="btn-save-power-wakeup">
+                    <span>تفعيل وحفظ إيقاظ Wi-Fi</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Help & Guidance Card -->
+            <div class="card col-span-2 adv-help-box">
+              <div class="adv-help-header">
+                <span class="adv-help-icon">ℹ️</span>
+                <h4 class="adv-help-title">دليل وإرشادات حفظ الطاقة لراوتر ZTE MC801A1</h4>
+              </div>
+              <p class="adv-help-text">
+                عند تفعيل «وضع النوم الودي المجدول»، يخفض المعالج ترددات النطاقات الثانوية لتقليل الحرارة الناتجة عن اتصال 5G المتواصل بنسبة تصل إلى 40%، مما يحافظ على عمر مكونات الراوتر الافتراضي ويقلل من استهلاك الطاقة أثناء النوم.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Pane 2: إعدادات الروتر والشبكة المحلية (Router & DHCP) -->
+        <div class="adv-subpane" id="subpane-adv-router" role="tabpanel">
+          <div class="dashboard-grid">
+            <!-- Router LAN & DHCP Settings -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🌐</span>
+                  <div>
+                    <h3 class="card-title">عنوان جهاز الراوتر وخادم DHCP</h3>
+                    <p class="card-subtitle">تحديد عنوان IP المحلي للبوابة، قناع الشبكة، ومجال توزيع عناوين الأجهزة المتصلة.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-grid mb-4">
+                  <div class="form-group">
+                    <label for="adv-router-ip">عنوان جهاز الراوتر (Gateway IP): <span class="text-rose-400">*</span></label>
+                    <input type="text" id="adv-router-ip" class="form-control font-mono" value="192.168.0.1" placeholder="192.168.0.1" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="adv-subnet-mask">قناع الشبكة الفرعية (Subnet Mask): <span class="text-rose-400">*</span></label>
+                    <input type="text" id="adv-subnet-mask" class="form-control font-mono" value="255.255.255.0" placeholder="255.255.255.0" />
+                  </div>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-bold">خادم DHCP (DHCP Server):</label>
+                  <div class="radio-pill-group mt-2">
+                    <label class="radio-pill">
+                      <input type="radio" name="adv-dhcp-server" value="1" id="adv-dhcp-on" checked />
+                      <span>تفعيل</span>
+                    </label>
+                    <label class="radio-pill">
+                      <input type="radio" name="adv-dhcp-server" value="0" id="adv-dhcp-off" />
+                      <span>تعطيل</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row mb-4">
+                  <div class="form-group flex-1">
+                    <label for="adv-dhcp-start">مجمع DHCP IP - بداية النطاق: <span class="text-rose-400">*</span></label>
+                    <input type="text" id="adv-dhcp-start" class="form-control font-mono" value="192.168.0.2" />
+                  </div>
+                  <div class="form-group flex-1">
+                    <label for="adv-dhcp-end">مجمع DHCP IP - نهاية النطاق: <span class="text-rose-400">*</span></label>
+                    <input type="text" id="adv-dhcp-end" class="form-control font-mono" value="192.168.0.253" />
+                  </div>
+                  <div class="form-group w-36">
+                    <label for="adv-dhcp-lease">وقت التأجير: <span class="text-rose-400">*</span></label>
+                    <div class="input-with-unit">
+                      <input type="number" id="adv-dhcp-lease" class="form-control font-mono" value="24" min="1" max="168" />
+                      <span class="unit-text">ساعة</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Warning Notice matching ZTE Screenshot 2 -->
+                <div class="modal-alert-warning mb-4">
+                  ⚠️ لا يمكن تغيير الإعداد عندما يكون المودم متصل. يجب قطع الاتصال لتطبيق أي تعديل على عنوان IP أو نطاق DHCP.
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-primary" id="btn-save-router-dhcp">
+                    <span>تطبيق إعدادات الروتر و DHCP</span>
+                  </button>
+                  <button class="btn btn-secondary" id="btn-open-mac-binding-modal">
+                    <span>ربط MAC-IP الثابت ←</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- MTU & MSS Packet Optimization Card -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">📦</span>
+                  <div>
+                    <h3 class="card-title">تحسين حزم البيانات (MTU و MSS)</h3>
+                    <p class="card-subtitle">ضبط الحجم الأقصى لحزم البيانات المنقولة لتقليل التقطيع وتحسين زمن الاستجابة في الألعاب (Ping).</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-grid mb-4">
+                  <div class="form-group">
+                    <label for="adv-mtu">حجم وحدة الإرسال الكبرى (MTU): <span class="text-rose-400">*</span></label>
+                    <div class="flex gap-2">
+                      <input type="number" id="adv-mtu" class="form-control font-mono" value="1343" min="576" max="1500" />
+                      <button class="btn btn-secondary btn-sm" id="btn-mtu-preset-1500" title="القياسي للإنترنت السريع">1500</button>
+                      <button class="btn btn-secondary btn-sm" id="btn-mtu-preset-1420" title="مثالي للألعاب والألياف">1420</button>
+                      <button class="btn btn-secondary btn-sm" id="btn-mtu-preset-1343" title="الافتراضي لراوتر ZTE">1343</button>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="adv-mss">حجم القطعة الأقصى (MSS):</label>
+                    <div class="flex gap-2">
+                      <input type="number" id="adv-mss" class="form-control font-mono" value="1303" min="536" max="1460" />
+                      <button class="btn btn-secondary btn-sm" id="btn-auto-calc-mss" title="حساب تلقائي = MTU - 40">حساب آلي</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-primary" id="btn-save-mtu-mss">
+                    <span>تطبيق قيم MTU و MSS</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Pane 3: إعدادات الحماية وجدار الحماية (Firewall & Security) -->
+        <div class="adv-subpane" id="subpane-adv-security" role="tabpanel">
+          <div class="dashboard-grid">
+            <!-- Port Forwarding Card -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🔀</span>
+                  <div>
+                    <h3 class="card-title">إعادة توجيه المنفذ (Port Forwarding)</h3>
+                    <p class="card-subtitle">توجيه المنافذ الخارجية إلى أجهزة وخوادم منزلية (خوادم NAS، كاميرات المراقبة، ألعاب الأونلاين).</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="toggle-card-row mb-3">
+                  <span>تفعيل إعادة توجيه المنافذ:</span>
+                  <label class="switch-label">
+                    <input type="checkbox" id="adv-port-forward-toggle" checked />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+                <div class="text-sm text-slate-400 mb-3">القواعد النشطة: 2 منافذ موجهة (HTTP: 80, Gaming: 3074)</div>
+                <button class="btn btn-secondary btn-sm w-full" id="btn-manage-port-forward">إدارة قواعد توجيه المنافذ ←</button>
+              </div>
+            </div>
+
+            <!-- UPnP Universal Plug and Play Card -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🎮</span>
+                  <div>
+                    <h3 class="card-title">التوصيل والتشغيل العالمي (UPnP)</h3>
+                    <p class="card-subtitle">فتح المنافذ تلقائياً لمنصات الألعاب (PlayStation / Xbox) للحصول على Open NAT وتجربة ألعاب سلسة.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="toggle-card-row mb-3">
+                  <span>تفعيل خدمة UPnP التلقائية:</span>
+                  <label class="switch-label">
+                    <input type="checkbox" id="adv-upnp-toggle" checked />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+                <div class="text-sm text-emerald-400 mb-3">✓ مفعل: يسمح بفتح المنافذ الديناميكية لألعاب الطرفية تلقائياً.</div>
+                <button class="btn btn-primary btn-sm w-full" id="btn-save-upnp">حفظ إعداد UPnP</button>
+              </div>
+            </div>
+
+            <!-- DMZ Host Card -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🛡️</span>
+                  <div>
+                    <h3 class="card-title">المنطقة الآمنة المعزولة (DMZ)</h3>
+                    <p class="card-subtitle">توجيه جميع المنافذ والاتصالات غير المحددة مباشرة إلى عنوان IP لجهاز واحد محدد.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="toggle-card-row mb-3">
+                  <span>تفعيل مضيف DMZ:</span>
+                  <label class="switch-label">
+                    <input type="checkbox" id="adv-dmz-toggle" />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="adv-dmz-ip">عنوان IP لجهاز DMZ:</label>
+                  <input type="text" id="adv-dmz-ip" class="form-control font-mono" value="192.168.0.100" placeholder="192.168.0.x" />
+                </div>
+                <button class="btn btn-primary btn-sm w-full" id="btn-save-dmz">تطبيق مضيف DMZ</button>
+              </div>
+            </div>
+
+            <!-- Port Filtering Card -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🚫</span>
+                  <div>
+                    <h3 class="card-title">تصفية المنفذ (Port Filtering)</h3>
+                    <p class="card-subtitle">حظر حزم البيانات غير المصرح بها عبر أرقام منافذ محددة لحماية الشبكة من الهجمات.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="toggle-card-row mb-3">
+                  <span>تفعيل تصفية المنافذ:</span>
+                  <label class="switch-label">
+                    <input type="checkbox" id="adv-port-filter-toggle" />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+                <div class="text-sm text-slate-400 mb-3">حظر المنافذ الخطرة مثل SMB (445) و Telnet (23).</div>
+                <button class="btn btn-secondary btn-sm w-full" id="btn-manage-port-filter">تعديل قائمة الحظر ←</button>
+              </div>
+            </div>
+
+            <!-- URL Filtering Card -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🌐</span>
+                  <div>
+                    <h3 class="card-title">فلترة عناوين URL والمواقع (URL Filtering)</h3>
+                    <p class="card-subtitle">حظر مواقع إلكترونية غير مرغوبة أو كلمات مفتاحية محددة على مستوى الراوتر بالكامل.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="toggle-card-row mb-3">
+                  <span>تفعيل فلترة عناوين المواقع:</span>
+                  <label class="switch-label">
+                    <input type="checkbox" id="adv-url-filter-toggle" />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+                <div class="flex gap-2">
+                  <input type="text" id="adv-url-block-input" class="form-control font-mono flex-1" placeholder="أدخل اسم النطاق المراد حظره (مثال: example.com)" />
+                  <button class="btn btn-primary btn-sm" id="btn-add-blocked-url">إضافة للحظر</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Pane 4: إعدادات التحديث (Firmware Updates) -->
+        <div class="adv-subpane" id="subpane-adv-update" role="tabpanel">
+          <div class="dashboard-grid">
+            <!-- Check New Version Card -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🔄</span>
+                  <div>
+                    <h3 class="card-title">تحقق وجود إصدار جديد (Check New Version)</h3>
+                    <p class="card-subtitle">فحص خوادم ZTE الرسمية للتأكد من توفر تحديثات أمنية واستقرار لفيرموير الراوتر.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="fw-status-wrap mb-4">
+                  <div class="fw-info-item">
+                    <span class="fw-label">الإصدار الحالي المثبت:</span>
+                    <span class="fw-val font-mono" id="adv-current-firmware">BD_SAUMC801AV1.0.0B07</span>
+                  </div>
+                  <div class="fw-info-item">
+                    <span class="fw-label">حالة التحديث:</span>
+                    <span class="badge badge-success" id="adv-last-update-status">النظام محدث ومستقر</span>
+                  </div>
+                  <div class="fw-info-item">
+                    <span class="fw-label">تاريخ آخر فحص:</span>
+                    <span class="text-slate-300 text-sm" id="adv-last-check-time">اليوم (مباشر)</span>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-primary" id="btn-check-new-update">
+                    <span id="btn-check-update-spinner" class="spinner-icon hidden">⏳</span>
+                    <span>تحقق الآن من وجود إصدار جديد</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Auto Update Check Settings Card -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">⚙️</span>
+                  <div>
+                    <h3 class="card-title">ضبط فحص التحديث التلقائي (Auto Update Settings)</h3>
+                    <p class="card-subtitle">إدارة الجدولة الزمنية لفحص التحديثات وسياسة التحميل أثناء التجوال.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group mb-4">
+                  <label class="font-bold">تحقق آلي من وجود إصدار جديد:</label>
+                  <div class="radio-pill-group mt-2">
+                    <label class="radio-pill">
+                      <input type="radio" name="adv-auto-update" value="1" id="adv-auto-update-on" checked />
+                      <span>تفعيل</span>
+                    </label>
+                    <label class="radio-pill">
+                      <input type="radio" name="adv-auto-update" value="0" id="adv-auto-update-off" />
+                      <span>تعطيل</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Roaming Checkbox matching ZTE Screenshot 4 -->
+                <div class="form-check mb-4">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="adv-roaming-update-check" />
+                    <span>حدد هذا الخيار، وسيتم تحديث الجهاز عند التجوال، والتي سوف تتحمل رسوم التجوال.</span>
+                  </label>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-primary" id="btn-save-update-settings">
+                    <span>تفعيل وحفظ إعدادات التحديث</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Safe Update Notice -->
+            <div class="card col-span-2 adv-help-box">
+              <div class="adv-help-header">
+                <span class="adv-help-icon">💡</span>
+                <h4 class="adv-help-title">إرشادات الأمان لتحديثات الراوتر</h4>
+              </div>
+              <p class="adv-help-text">
+                تأكد من استقرار مصدر الطاقة قبل بدء أي تحديث للراوتر، وتجنب فصل كابل الكهرباء أثناء تثبيت الحزم لمنع تلف الذاكرة الفلاشية للمودم.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Pane 5: الصيانة وأدوات النظام ("أخرى" / Maintenance & Diagnostics) -->
+        <div class="adv-subpane" id="subpane-adv-tools" role="tabpanel">
+          <div class="dashboard-grid">
+            <!-- Live Network Ping Diagnostics Tool -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">⚡</span>
+                  <div>
+                    <h3 class="card-title">أدوات تشخيص وفحص الشبكة (Ping & Diagnostics)</h3>
+                    <p class="card-subtitle">فحص زمن الوصول وفقدان الحزم لأي وجهة في الوقت الفعلي عبر اتصال الراوتر.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="flex gap-2 mb-3">
+                  <input type="text" id="adv-diag-host" class="form-control font-mono flex-1" value="192.168.0.1" placeholder="أدخل عنوان IP أو النطاق (مثال: 8.8.8.8 أو google.com)" />
+                  <button class="btn btn-secondary btn-sm" id="btn-diag-preset-gateway">بوابة 192.168.0.1</button>
+                  <button class="btn btn-secondary btn-sm" id="btn-diag-preset-google">Google 8.8.8.8</button>
+                  <button class="btn btn-secondary btn-sm" id="btn-diag-preset-cf">Cloudflare 1.1.1.1</button>
+                  <button class="btn btn-primary" id="btn-run-diag-ping">
+                    <span>⚡ بدء الفحص</span>
+                  </button>
+                </div>
+
+                <div class="diag-console-wrap">
+                  <div class="diag-console-header">
+                    <span>سجل استجابة الأداة التشخيصية:</span>
+                    <span class="font-mono text-xs text-sky-400" id="adv-diag-status-badge">جاهز للفحص</span>
+                  </div>
+                  <pre class="diag-console-body" id="adv-diag-output">جاهز لبدء الفحص. حدد الوجهة واضغط «بدء الفحص» لعرض النتائج الحية.</pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- SNTP Time Sync Card -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🕒</span>
+                  <div>
+                    <h3 class="card-title">مزامنة الوقت (SNTP)</h3>
+                    <p class="card-subtitle">ضبط الوقت الدقيق للراوتر وسجلات النظام.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group mb-3">
+                  <label for="adv-sntp-server">خادم الوقت (SNTP Server):</label>
+                  <input type="text" id="adv-sntp-server" class="form-control font-mono" value="time.windows.com" />
+                </div>
+                <button class="btn btn-primary btn-sm w-full" id="btn-save-sntp">مزامنة الوقت الآن</button>
+              </div>
+            </div>
+
+            <!-- Scheduled Reboot Card -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">📅</span>
+                  <div>
+                    <h3 class="card-title">جدولة إعادة التشغيل</h3>
+                    <p class="card-subtitle">إعادة تشغيل أسبوعية لتفريغ الذاكرة المؤقتة للراوتر.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="toggle-card-row mb-3">
+                  <span>تفعيل الجدولة الأسبوعية:</span>
+                  <label class="switch-label">
+                    <input type="checkbox" id="adv-schedule-reboot-toggle" />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+                <div class="flex gap-2 mb-3">
+                  <select id="adv-schedule-day" class="form-control flex-1">
+                    <option value="Friday" selected>يوم الجمعة</option>
+                    <option value="Monday">يوم الإثنين</option>
+                    <option value="Daily">يومياً</option>
+                  </select>
+                  <input type="time" id="adv-schedule-time" class="form-control w-28" value="04:00" />
+                </div>
+                <button class="btn btn-primary btn-sm w-full" id="btn-save-schedule-reboot">حفظ الجدولة</button>
+              </div>
+            </div>
+
+            <!-- System Maintenance Actions Card -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <div class="card-header-title">
+                  <span class="card-icon">🛠️</span>
+                  <div>
+                    <h3 class="card-title">عمليات النظام والصيانة الطارئة</h3>
+                    <p class="card-subtitle">إعادة التشغيل الآمن، استعادة ضبط المصنع، والنسخ الاحتياطي للإعدادات.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="tools-action-grid">
+                  <div class="tool-action-box">
+                    <div class="tool-action-info">
+                      <span class="tool-action-icon">🔄</span>
+                      <div>
+                        <div class="font-bold text-white">إعادة تشغيل الراوتر (Reboot)</div>
+                        <div class="text-xs text-slate-400">إعادة تشغيل عتاد الراوتر وتجديد الجلسة بأمان.</div>
+                      </div>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" id="btn-adv-reboot-action">إعادة التشغيل الآن</button>
+                  </div>
+
+                  <div class="tool-action-box">
+                    <div class="tool-action-info">
+                      <span class="tool-action-icon">💾</span>
+                      <div>
+                        <div class="font-bold text-white">النسخ الاحتياطي للإعدادات</div>
+                        <div class="text-xs text-slate-400">حفظ كافة الترددات وكلمات المرور في ملف آمن.</div>
+                      </div>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" id="btn-adv-backup-config">تصدير ملف النسخة</button>
+                  </div>
+
+                  <div class="tool-action-box danger-box">
+                    <div class="tool-action-info">
+                      <span class="tool-action-icon text-rose-400">⚠️</span>
+                      <div>
+                        <div class="font-bold text-rose-300">استعادة ضبط المصنع (Factory Reset)</div>
+                        <div class="text-xs text-rose-200">مسح كافة التعديلات والعودة لحالة المصنع الأصلية.</div>
+                      </div>
+                    </div>
+                    <button class="btn btn-danger btn-sm" id="btn-adv-factory-reset-action">استعادة ضبط المصنع</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Reboot Confirmation Modal Dialog -->
+  <div class="modal-overlay hidden" id="reboot-modal" role="dialog" aria-modal="true" aria-labelledby="reboot-modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title text-red-400" id="reboot-modal-title">تأكيد إعادة تشغيل الراوتر</h3>
+        <button class="modal-close" id="btn-close-reboot-modal" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-slate-200 mb-4">
+          هل أنت متأكد تماماً من رغبتك في إعادة تشغيل الراوتر الآن؟
+        </p>
+        <div class="modal-alert-warning">
+          ⚠️ سيتم قطع اتصال الإنترنت عن جميع الأجهزة المتصلة بالراوتر لمدة تتراوح بين دقيقة إلى دقيقتين حتى يكتمل إقلاع الجهاز مجدداً.
+        </div>
+        <div class="form-check mt-4">
+          <label class="checkbox-label">
+            <input type="checkbox" id="reboot-confirm-check" />
+            <span>نعم، أؤكد رغبتي في إعادة تشغيل الراوتر الآن.</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" id="btn-confirm-reboot" disabled>تأكيد إعادة التشغيل</button>
+        <button class="btn btn-secondary" id="btn-cancel-reboot">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rename / Nickname Device Modal -->
+  <div class="modal-overlay hidden" id="nickname-modal" role="dialog" aria-modal="true" aria-labelledby="nickname-modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title text-cyan-400" id="nickname-modal-title">تسمية وتخصيص الجهاز</h3>
+        <button class="modal-close" id="btn-close-nickname-modal" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="text-xs text-slate-400">عنوان MAC:</label>
+          <div class="font-mono text-white text-sm" id="modal-device-mac">--</div>
+        </div>
+        <div class="mb-3">
+          <label class="text-xs text-slate-400">الاسم الأصلي المكتشف:</label>
+          <div class="text-slate-300 text-sm" id="modal-device-origname">--</div>
+        </div>
+        <div class="form-group mt-4">
+          <label for="input-custom-nickname">الاسم المخصص (مثال: هاتف خالد، شاشة الصالة):</label>
+          <input type="text" id="input-custom-nickname" class="form-control" placeholder="أدخل اسماً مألوفاً للجهاز" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="btn-save-nickname">حفظ التسمية</button>
+        <button class="btn btn-secondary" id="btn-cancel-nickname">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manual Device Import Modal -->
+  <div class="modal-overlay hidden" id="manual-import-modal" role="dialog" aria-modal="true" aria-labelledby="manual-import-modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title text-cyan-400" id="manual-import-modal-title">إضافة / استيراد جهاز يدوي</h3>
+        <button class="modal-close" id="btn-close-manual-import" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group mb-3">
+          <label for="input-manual-mac">عنوان MAC (إلزامي):</label>
+          <input type="text" id="input-manual-mac" class="form-control font-mono" placeholder="AA:BB:CC:DD:EE:FF" required />
+        </div>
+        <div class="form-group mb-3">
+          <label for="input-manual-ip">عنوان IP (اختياري):</label>
+          <input type="text" id="input-manual-ip" class="form-control font-mono" placeholder="192.168.0.x" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="input-manual-name">اسم الجهاز أو التسمية المخصصة:</label>
+          <input type="text" id="input-manual-name" class="form-control" placeholder="مثال: لابتوب العمل، كاميرا المراقبة" required />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="btn-confirm-manual-import">استيراد وحفظ الجهاز</button>
+        <button class="btn btn-secondary" id="btn-cancel-manual-import">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAC-IP Binding Modal Dialog -->
+  <div class="modal-overlay hidden" id="mac-ip-modal" role="dialog" aria-modal="true" aria-labelledby="mac-ip-modal-title">
+    <div class="modal-dialog max-w-xl">
+      <div class="modal-header">
+        <h3 class="modal-title text-cyan-400" id="mac-ip-modal-title">🔗 ربط عناوين MAC-IP الثابتة</h3>
+        <button class="modal-close" id="btn-close-mac-ip-modal" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-slate-300 text-sm mb-4">
+          تخصيص عناوين IP ثابتة لأجهزتك المفضلة (مثل منصات الألعاب، أجهزة التخزين الشبكي NAS، والكاميرات) لضمان عدم تغير عنوان IP الخاص بها.
+        </p>
+
+        <!-- Add Binding Form -->
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-sky-500/20 mb-4">
+          <div class="text-xs font-bold text-sky-400 mb-3">+ إضافة حجز عنوان IP جديد:</div>
+          <div class="grid grid-cols-3 gap-2 mb-3">
+            <div>
+              <label class="text-xs text-slate-400">عنوان MAC:</label>
+              <input type="text" id="input-binding-mac" class="form-control font-mono text-sm" placeholder="AA:BB:CC:DD:EE:FF" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-400">عنوان IP الثابت:</label>
+              <input type="text" id="input-binding-ip" class="form-control font-mono text-sm" placeholder="192.168.0.50" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-400">اسم الجهاز:</label>
+              <input type="text" id="input-binding-name" class="form-control text-sm" placeholder="مثال: PlayStation 5" />
+            </div>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-add-binding-entry">إضافة الحجز</button>
+        </div>
+
+        <!-- Binding List -->
+        <div class="text-xs font-bold text-slate-400 mb-2">قائمة العناوين المحجوزة حالياً:</div>
+        <div class="table-responsive max-h-48 overflow-y-auto">
+          <table class="devices-table">
+            <thead>
+              <tr>
+                <th>الجهاز</th>
+                <th>عنوان IP المحجوز</th>
+                <th>عنوان MAC</th>
+                <th>إجراء</th>
+              </tr>
+            </thead>
+            <tbody id="mac-binding-table-body">
+              <tr>
+                <td>منصة ألعاب (PS5)</td>
+                <td class="font-mono text-sky-400">192.168.0.50</td>
+                <td class="font-mono text-slate-400">00:1E:C2:55:88:99</td>
+                <td><button class="btn btn-secondary btn-xs text-rose-400 btn-delete-binding">حذف</button></td>
+              </tr>
+              <tr>
+                <td>خادم تخزين (NAS)</td>
+                <td class="font-mono text-sky-400">192.168.0.200</td>
+                <td class="font-mono text-slate-400">BC:D0:74:11:22:33</td>
+                <td><button class="btn btn-secondary btn-xs text-rose-400 btn-delete-binding">حذف</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="btn-save-mac-bindings">حفظ وتطبيق الحجوزات</button>
+        <button class="btn btn-secondary" id="btn-dismiss-mac-ip-modal">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Factory Reset Confirmation Modal Dialog -->
+  <div class="modal-overlay hidden" id="factory-reset-modal" role="dialog" aria-modal="true" aria-labelledby="factory-reset-modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title text-red-400" id="factory-reset-modal-title">⚠️ تأكيد استعادة ضبط المصنع</h3>
+        <button class="modal-close" id="btn-close-factory-reset-modal" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-slate-200 mb-4">
+          أنت على وشك استعادة ضبط المصنع لراوتر ZTE MC801A1.
+        </p>
+        <div class="modal-alert-danger">
+          🛑 تحذير شديد الأهمية: سيؤدي هذا الإجراء إلى مسح كافة التعديلات، أسماء وكلمات مرور Wi-Fi، وتثبيت الترددات، وإعادة الراوتر إلى حالته الافتراضية الأولى عند شرائه.
+        </div>
+        <div class="form-check mt-4">
+          <label class="checkbox-label">
+            <input type="checkbox" id="factory-reset-confirm-check" />
+            <span class="text-rose-300 font-bold">أدرك أن كافة الإعدادات والبيانات ستُمحى نهائياً.</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" id="btn-confirm-factory-reset" disabled>تأكيد المسح وضبط المصنع</button>
+        <button class="btn btn-secondary" id="btn-cancel-factory-reset">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Band / Network Settings Confirmation Modal Dialog -->
+  <div class="modal-overlay hidden" id="band-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="band-confirm-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title text-cyan-400" id="band-confirm-title">تأكيد تطبيق إعدادات الشبكة</h3>
+        <button class="modal-close" id="btn-close-band-confirm-modal" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-slate-200 mb-3" id="band-confirm-description">
+          أنت على وشك تعديل نطاقات أو نمط اتصال الراوتر.
+        </p>
+        <div class="modal-alert-warning">
+          ⚠️ قد ينقطع اتصال الإنترنت مؤقتاً لمدة 5 إلى 20 ثانية حتى يُعيد الراوتر التفاوض مع البرج وتطبيق الإعدادات الجديدة.
+        </div>
+        <div class="form-check mt-4">
+          <label class="checkbox-label">
+            <input type="checkbox" id="band-confirm-check" checked />
+            <span>نعم، أوافق على المتابعة وتطبيق الإعدادات الآن.</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="btn-confirm-band-action">تطبيق الإعدادات</button>
+        <button class="btn btn-secondary" id="btn-cancel-band-action">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Modal Dialog -->
+  <div class="modal-overlay hidden" id="shortcuts-modal" role="dialog" aria-modal="true" aria-labelledby="shortcuts-modal-title">
+    <div class="modal-dialog max-w-lg">
+      <div class="modal-header">
+        <h3 class="modal-title text-cyan-400" id="shortcuts-modal-title">⌨️ اختصارات لوحة المفاتيح</h3>
+        <button class="modal-close" id="btn-close-shortcuts-modal" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="shortcuts-grid">
+          <div class="shortcut-item">
+            <div class="shortcut-keys"><kbd>1</kbd> .. <kbd>6</kbd></div>
+            <span class="shortcut-desc">التنقل السريع المباشر بين الأقسام الستة</span>
+          </div>
+          <div class="shortcut-item">
+            <div class="shortcut-keys"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+            <span class="shortcut-desc">لوحة الأوامر الذكية والبحث السريع (Spotlight)</span>
+          </div>
+          <div class="shortcut-item">
+            <div class="shortcut-keys"><kbd>Ctrl</kbd> + <kbd>R</kbd> / <kbd>F5</kbd></div>
+            <span class="shortcut-desc">تحديث فوري لجميع قراءات الراوتر</span>
+          </div>
+          <div class="shortcut-item">
+            <div class="shortcut-keys"><kbd>Ctrl</kbd> + <kbd>B</kbd></div>
+            <span class="shortcut-desc">تشغيل / إيقاف التوجيه الصوتي (Beacon)</span>
+          </div>
+          <div class="shortcut-item">
+            <div class="shortcut-keys"><kbd>Ctrl</kbd> + <kbd>F</kbd></div>
+            <span class="shortcut-desc">التركيز على حقل البحث (الأجهزة / الرسائل)</span>
+          </div>
+          <div class="shortcut-item">
+            <div class="shortcut-keys"><kbd>Esc</kbd></div>
+            <span class="shortcut-desc">إغلاق أي نافذة حوارية أو تنبيه</span>
+          </div>
+          <div class="shortcut-item">
+            <div class="shortcut-keys"><kbd>؟</kbd> / <kbd>F1</kbd></div>
+            <span class="shortcut-desc">فتح هذه اللائحة من الاختصارات</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-dismiss-shortcuts">فهمت ذلك</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modern Spotlight Command Palette Modal (Ctrl+K) -->
+  <div class="modal-overlay hidden" id="command-palette-modal" role="dialog" aria-modal="true" aria-labelledby="cmd-palette-search">
+    <div class="modal-dialog cmd-palette-dialog">
+      <div class="cmd-palette-search-wrap">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cmd-search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="cmd-palette-search" class="cmd-palette-input" placeholder="ابحث عن أمر أو وظيفة في الراوتر... (استخدم الأسهم ⬆ ⬇ ثم Enter)" autocomplete="off" />
+        <kbd class="cmd-esc-hint">Esc</kbd>
+      </div>
+      <div class="cmd-palette-results" id="cmd-palette-results">
+        <!-- Rendered dynamically -->
+      </div>
+      <div class="cmd-palette-footer">
+        <div class="cmd-tip"><span>انتقال:</span> <kbd>↑</kbd> <kbd>↓</kbd></div>
+        <div class="cmd-tip"><span>تنفيذ:</span> <kbd>Enter</kbd></div>
+        <div class="cmd-tip"><span>إغلاق:</span> <kbd>Esc</kbd></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notification Stack -->
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
+
