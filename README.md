@@ -5,8 +5,13 @@
 
 <div align="center">
 
-[![الإصدار الأخير](https://img.shields.io/github/v/release/RaadDev/ZTE-MC801A1-UI-Controller?style=for-the-badge&color=0284c7&label=الإصدار)](https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest)
-[![الترخيص](https://img.shields.io/badge/الترخيص-MIT-3b82f6?style=for-the-badge)](LICENSE)
+<a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest">
+  <img src="assets/badge-release.svg" alt="الإصدار الأخير - v1.0.1" height="28">
+</a>
+&nbsp;&nbsp;
+<a href="LICENSE">
+  <img src="assets/badge-license.svg" alt="الترخيص - MIT" height="28">
+</a>
 
 </div>
 

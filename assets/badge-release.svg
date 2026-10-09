@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="154" height="28" viewBox="0 0 154 28" fill="none">
+  <defs>
+    <linearGradient id="val-grad-release" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+  </defs>
+  <rect width="154" height="28" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <!-- Value box -->
+  <path d="M0 6C0 2.68629 2.68629 0 6 0H68V28H6C2.68629 28 0 25.3137 0 22V6Z" fill="url(#val-grad-release)"/>
+  <!-- Value text -->
+  <text x="34" y="18" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" letter-spacing="0.5" text-anchor="middle">v1.0.1</text>
+  <!-- Label text (Arabic) -->
+  <text x="110" y="18" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans Arabic', Tahoma, sans-serif" font-size="12" font-weight="600" text-anchor="middle">الإصدار الأخير</text>
+</svg>
