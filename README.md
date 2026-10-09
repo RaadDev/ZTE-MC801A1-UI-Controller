@@ -1,9 +1,13 @@
+<div align="center">
+
+<img src="assets/icon.png" alt="أيقونة تطبيق موجّه" width="108" height="108" style="border-radius: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.35);">
+
 # تطبيق موجّه (Mowajjih)
 ### أداة إدارة وتثبيت ترددات راوتر ZTE 5G
 
 برنامج مجاني وخفيف للتحكم الكامل براوترات **ZTE MC801A** و **ZTE MC801A1** على نظام Windows.
 
-<div align="center">
+<br>
 
 <a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest">
   <img src="assets/badge-release.svg" alt="الإصدار الأخير - v1.0.1" height="28">
