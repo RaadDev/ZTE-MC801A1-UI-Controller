@@ -10,6 +10,7 @@
     "dist": "node build.js --minify && electron-builder --win",
     "dist:setup": "node build.js --minify && electron-builder --win nsis",
     "dist:portable": "node build.js --minify && electron-builder --win portable",
+    "release": "node scripts/publish-release.js",
     "test": "node tests/test_bridge.js",
     "typecheck": "tsc --noEmit",
     "start": "node build.js && electron ."
