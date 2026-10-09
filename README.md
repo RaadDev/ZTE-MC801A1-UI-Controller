@@ -69,6 +69,35 @@
 
 ---
 
+## لقطات من التطبيق
+
+<div align="center">
+
+### لوحة التحكم الرئيسية
+<img src="assets/الشاشة%20الرئيسية%20بعد%20التسجيل.png" alt="لوحة التحكم الرئيسية" width="850" style="border-radius: 10px; max-width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+
+<br><br>
+
+### تثبيت النطاقات ومساعد توجيه الإشارة
+<p align="center">
+  <img src="assets/تثبيت%20النطاقات.png" alt="تثبيت النطاقات والترددات" width="48%" style="border-radius: 8px; vertical-align: top;">
+  &nbsp;
+  <img src="assets/مساعد%20الانتينا%20و%20الاشاره.png" alt="مساعد توجيه الإشارة والأنتينا" width="48%" style="border-radius: 8px; vertical-align: top;">
+</p>
+
+<br>
+
+### شاشة تسجيل الدخول والإعدادات المتقدمة
+<p align="center">
+  <img src="assets/الشاشة%20الرئيسية.png" alt="شاشة تسجيل الدخول" width="48%" style="border-radius: 8px; vertical-align: top;">
+  &nbsp;
+  <img src="assets/الاعدادات%20المتقدمة.png" alt="الإعدادات المتقدمة والتشخيص" width="48%" style="border-radius: 8px; vertical-align: top;">
+</p>
+
+</div>
+
+---
+
 ## طريقة الاستخدام
 
 1. حمّل البرنامج وافتحه.
