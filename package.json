@@ -1,7 +1,7 @@
 {
   "name": "mowajjih",
   "productName": "Mowajjih",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "تطبيق سطح مكتب عربي متطور لإدارة ومراقبة راوتر ZTE 5G",
   "main": "dist/main/index.js",
   "scripts": {

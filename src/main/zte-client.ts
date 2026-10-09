@@ -957,7 +957,7 @@ export class ZteClient {
   public async set5gBandLock(
     bands: string[],
     routerIp?: string
-  ): Promise<{ success: boolean; message: string }> {
+  ): Promise<{ success: boolean; message: string; bands?: string[]; mask?: string; strategy?: string; routerResponse?: any }> {
     const cleanNumbers = (bands || []).map(b => b.replace(/^n/i, '').trim()).filter(Boolean);
     const isReset = cleanNumbers.length === 0;
 
@@ -973,7 +973,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تم فك قفل نطاقات 5G والعودة للاختيار التلقائي لجميع النطاقات بنجاح.'
-          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`
+          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`,
+        bands: cleanNumbers,
+        mask: commaMask,
+        strategy: 'WAN_PERFORM_NR5G_BAND_LOCK (Comma)',
+        routerResponse: res
       };
     }
 
@@ -985,7 +989,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تم فك قفل نطاقات 5G والعودة للاختيار التلقائي لجميع النطاقات بنجاح.'
-          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`
+          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`,
+        bands: cleanNumbers,
+        mask: plusMask,
+        strategy: 'WAN_PERFORM_NR5G_BAND_LOCK (Plus)',
+        routerResponse: res
       };
     }
 
@@ -993,15 +1001,15 @@ export class ZteClient {
     if (isReset) {
       res = await this.executeSetCommand('WAN_PERFORM_NR5G_BAND_LOCK', { nr5g_band_mask: 'AUTO' }, routerIp);
       if (res.success) {
-        return { success: true, message: 'تم فك قفل نطاقات 5G بنجاح (وضع AUTO التلقائي).' };
+        return { success: true, message: 'تم فك قفل نطاقات 5G بنجاح (وضع AUTO التلقائي).', mask: 'AUTO', strategy: 'WAN_PERFORM_NR5G_BAND_LOCK (AUTO)', routerResponse: res };
       }
       res = await this.executeSetCommand('WAN_PERFORM_NR5G_BAND_LOCK', { nr5g_band_mask: '0' }, routerIp);
       if (res.success) {
-        return { success: true, message: 'تم فك قفل نطاقات 5G بنجاح.' };
+        return { success: true, message: 'تم فك قفل نطاقات 5G بنجاح.', mask: '0', strategy: 'WAN_PERFORM_NR5G_BAND_LOCK (0)', routerResponse: res };
       }
       res = await this.executeSetCommand('WAN_PERFORM_NR5G_BAND_LOCK', { nr5g_band_mask: '' }, routerIp);
       if (res.success) {
-        return { success: true, message: 'تم فك قفل نطاقات 5G بنجاح.' };
+        return { success: true, message: 'تم فك قفل نطاقات 5G بنجاح.', mask: '', strategy: 'WAN_PERFORM_NR5G_BAND_LOCK (Empty)', routerResponse: res };
       }
     }
 
@@ -1013,7 +1021,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تم فك قفل نطاقات 5G بنجاح.'
-          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`
+          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`,
+        bands: cleanNumbers,
+        mask: `0x${hexMask}`,
+        strategy: 'WAN_PERFORM_NR5G_BAND_LOCK (Hex)',
+        routerResponse: res
       };
     }
 
@@ -1030,7 +1042,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تم فك قفل نطاقات 5G والعودة للاختيار التلقائي.'
-          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`
+          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`,
+        bands: cleanNumbers,
+        mask: `0x${hexMask}`,
+        strategy: 'BAND_SELECT (5G)',
+        routerResponse: res
       };
     }
 
@@ -1041,7 +1057,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تم فك قفل نطاقات 5G بنجاح.'
-          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`
+          : `تم تطبيق قفل وتثبيت نطاقات 5G بنجاح على: N${cleanNumbers.join(', N')}.`,
+        bands: cleanNumbers,
+        mask: cleanNumbers.join(','),
+        strategy: 'SET_5G_BAND',
+        routerResponse: res
       };
     }
 
@@ -1091,7 +1111,7 @@ export class ZteClient {
     bands: string[],
     isAuto: boolean = false,
     routerIp?: string
-  ): Promise<{ success: boolean; message: string }> {
+  ): Promise<{ success: boolean; message: string; bands?: string[]; mask?: string; strategy?: string; routerResponse?: any }> {
     const isReset = isAuto || !bands || bands.length === 0;
     const cleanBandsList = (bands || []).map(b => b.replace(/^b/i, '').trim()).filter(Boolean);
     const cleanBands = cleanBandsList.join(',');
@@ -1119,7 +1139,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تمت إعادة تعيين نطاقات 4G LTE إلى الوضع التلقائي (Auto) بنجاح.'
-          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`
+          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`,
+        bands: cleanBandsList,
+        mask: isReset ? ALL_LTE_BANDS_MASK : `0x${hexMaskLower}`,
+        strategy: 'BAND_SELECT (Strategy 1: 0x hex mask)',
+        routerResponse: res
       };
     }
 
@@ -1136,7 +1160,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تمت إعادة تعيين نطاقات 4G LTE إلى الوضع التلقائي (Auto) بنجاح.'
-          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`
+          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`,
+        bands: cleanBandsList,
+        mask: isReset ? ALL_LTE_BANDS_FULL : `0x${hexMaskUpper}`,
+        strategy: 'BAND_SELECT (Strategy 2: uppercase 0x hex mask)',
+        routerResponse: res
       };
     }
 
@@ -1153,7 +1181,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تمت إعادة تعيين نطاقات 4G LTE إلى الوضع التلقائي (Auto) بنجاح.'
-          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`
+          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`,
+        bands: cleanBandsList,
+        mask: isReset ? 'A3E2AB0908DF' : hexMaskUpper,
+        strategy: 'BAND_SELECT (Strategy 3: raw hex)',
+        routerResponse: res
       };
     }
 
@@ -1171,7 +1203,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تمت إعادة تعيين نطاقات 4G LTE إلى الوضع التلقائي (Auto) بنجاح.'
-          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`
+          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`,
+        bands: cleanBandsList,
+        mask: isReset ? '0' : `0x${hexMaskLower}`,
+        strategy: 'BAND_SELECT (Strategy 4: is_band_auto)',
+        routerResponse: res
       };
     }
 
@@ -1189,7 +1225,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تمت إعادة تعيين نطاقات 4G LTE إلى الوضع التلقائي (Auto) بنجاح.'
-          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`
+          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`,
+        bands: cleanBandsList,
+        mask: isReset ? ALL_LTE_BANDS_MASK : `0x${hexMaskLower}`,
+        strategy: 'BAND_SELECT (Strategy 5: comma lte_band)',
+        routerResponse: res
       };
     }
 
@@ -1204,7 +1244,11 @@ export class ZteClient {
         success: true,
         message: isReset
           ? 'تمت إعادة تعيين نطاقات 4G LTE إلى الوضع التلقائي (Auto) بنجاح.'
-          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`
+          : `تم قفل وتثبيت نطاقات 4G بنجاح على: ${cleanBandsList.map(b => 'B' + b).join(', ')}.`,
+        bands: cleanBandsList,
+        mask: cleanBands,
+        strategy: 'WAN_PERFORM_LTE_BAND_LOCK',
+        routerResponse: res
       };
     }
 

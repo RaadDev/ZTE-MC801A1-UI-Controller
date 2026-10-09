@@ -490,7 +490,7 @@ ipcMain.handle('set-5g-bands', async (_, bands: string[]) => {
     }
     try {
       const result = await bridgeServer.getClient().set5gBandLock(bands);
-      return { success: true, message: result.message };
+      return { ...result };
     } catch (err: any) {
       return { success: false, error: err.message };
     }
@@ -505,7 +505,7 @@ ipcMain.handle('set-4g-bands', async (_, { bands, isAuto }: { bands: string[]; i
     }
     try {
       const result = await bridgeServer.getClient().set4gBandLock(bands, isAuto);
-      return { success: true, message: result.message };
+      return { ...result };
     } catch (err: any) {
       return { success: false, error: err.message };
     }

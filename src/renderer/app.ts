@@ -7,6 +7,7 @@ import { ToastManager } from './modules/toast';
 import { AudioBeaconManager } from './modules/audio-beacon';
 import { CommandPaletteManager } from './modules/command-palette';
 import { updateWifiQrCard } from './modules/wifi-qr';
+import { LoggerManager, DiagnosticSnapshot } from './modules/logger';
 
 class MowajjihApp {
   private isConnected: boolean = false;
@@ -26,7 +27,10 @@ class MowajjihApp {
   private routerStatusLabel: HTMLElement;
   private bridgeStatusDot: HTMLElement;
   private bridgeStatusText: HTMLElement;
+  private autoRefreshContainer: HTMLElement | null = null;
   private autoRefreshToggle: HTMLInputElement;
+  private autoRefreshLabel: HTMLElement | null = null;
+  private refreshIntervalBtns: NodeListOf<HTMLButtonElement> | null = null;
   private btnManualRefresh: HTMLButtonElement;
   private btnQuickConnect: HTMLButtonElement;
   private refreshIcon: HTMLElement;
@@ -120,6 +124,8 @@ class MowajjihApp {
   private valCurr5gBand: HTMLElement;
   private valCurr4gBand: HTMLElement;
   private valCurrCellLock: HTMLElement;
+  private locked4gBands: string[] = [];
+  private locked5gBands: string[] = [];
   private btnApplyNetworkMode: HTMLButtonElement;
   private check5gBands: NodeListOf<HTMLInputElement>;
   private btnApply5gLock: HTMLButtonElement;
@@ -216,6 +222,7 @@ class MowajjihApp {
   // Modern Features: Modular Managers
   private commandPalette!: CommandPaletteManager;
   private audioBeacon!: AudioBeaconManager;
+  public logger!: LoggerManager;
 
   // Modern Features: Wi-Fi QR Code Share
   private qrSvgContainer: HTMLElement | null = null;
@@ -232,7 +239,15 @@ class MowajjihApp {
     this.routerStatusLabel = document.getElementById('router-status-label')!;
     this.bridgeStatusDot = document.getElementById('bridge-status-dot')!;
     this.bridgeStatusText = document.getElementById('bridge-status-text')!;
+    this.autoRefreshContainer = document.getElementById('auto-refresh-control');
     this.autoRefreshToggle = document.getElementById('auto-refresh-toggle') as HTMLInputElement;
+    this.autoRefreshLabel = document.getElementById('auto-refresh-label');
+    this.refreshIntervalBtns = document.querySelectorAll('.interval-btn') as NodeListOf<HTMLButtonElement>;
+
+    const savedInterval = localStorage.getItem('mowajjih-refresh-interval');
+    if (savedInterval && ['1', '3', '5'].includes(savedInterval)) {
+      this.autoRefreshIntervalSec = parseInt(savedInterval, 10);
+    }
     this.btnManualRefresh = document.getElementById('btn-manual-refresh') as HTMLButtonElement;
     this.btnQuickConnect = document.getElementById('btn-quick-connect') as HTMLButtonElement;
     this.refreshIcon = document.getElementById('refresh-icon')!;
@@ -393,6 +408,14 @@ class MowajjihApp {
       onToast: (msg, type) => this.showToast(msg, type as any)
     });
     this.commandPalette = new CommandPaletteManager(() => this.getCommandList());
+    this.logger = new LoggerManager({
+      containerId: 'log-entries-container',
+      onStatsChange: (stats) => this.updateLogStats(stats)
+    });
+    if (!sessionStorage.getItem('mowajjih-started')) {
+      sessionStorage.setItem('mowajjih-started', 'true');
+      this.logger.info('SYSTEM', 'تم تشغيل لوحة تحكم «موجّه» وتفعيل محرك المراقبة والتشخيص الذكي.');
+    }
 
     // Modern Features: Wi-Fi QR Code Share
     this.qrSvgContainer = document.getElementById('qr-svg-container');
@@ -435,12 +458,28 @@ class MowajjihApp {
 
     // Auto-Refresh Toggle
     this.autoRefreshToggle.addEventListener('change', () => {
+      this.updateAutoRefreshUI();
       if (this.autoRefreshToggle.checked) {
-        this.startAutoRefresh();
+        if (this.isConnected) {
+          this.startAutoRefresh();
+        }
       } else {
         this.stopAutoRefresh();
       }
     });
+
+    // Auto-Refresh Interval Buttons (1s, 3s, 5s)
+    if (this.refreshIntervalBtns) {
+      this.refreshIntervalBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const sec = parseInt(btn.getAttribute('data-sec') || '5', 10);
+          this.setAutoRefreshInterval(sec);
+        });
+      });
+    }
+
+    this.updateAutoRefreshUI();
 
     // Password Toggle Visibility
     this.btnTogglePw.addEventListener('click', () => {
@@ -909,6 +948,29 @@ class MowajjihApp {
         }
       }
     } catch {}
+
+    // Restore user locked bands cache
+    try {
+      const saved4g = localStorage.getItem('mowajjih-locked-4g-bands');
+      if (saved4g) {
+        this.locked4gBands = JSON.parse(saved4g);
+        if (Array.isArray(this.locked4gBands) && this.locked4gBands.length > 0) {
+          this.check4gBands.forEach(chk => {
+            chk.checked = this.locked4gBands.includes(chk.value);
+          });
+        }
+      }
+      const saved5g = localStorage.getItem('mowajjih-locked-5g-bands');
+      if (saved5g) {
+        this.locked5gBands = JSON.parse(saved5g);
+        if (Array.isArray(this.locked5gBands) && this.locked5gBands.length > 0) {
+          this.check5gBands.forEach(chk => {
+            chk.checked = this.locked5gBands.includes(chk.value);
+          });
+        }
+      }
+      this.updateLockedBandsUI();
+    } catch {}
   }
 
   private async saveConfig(): Promise<void> {
@@ -1000,10 +1062,13 @@ class MowajjihApp {
     const connectionPill = document.getElementById('connection-pill');
     if (connectionPill) connectionPill.className = 'connection-pill connecting';
 
+    this.logger.info('ROUTER', `بدء محاولة الاتصال بالراوتر وتسجيل الدخول: ${routerIp}`);
+
     try {
       const res = await window.mowajjih.connectRouter({ routerIp, password });
       if (res && res.success) {
         this.isConnected = true;
+        this.logger.success('ROUTER', `تم الاتصال بالراوتر (${routerIp}) وتسجيل الدخول بنجاح!`, res);
         this.showAlert('تم الاتصال بالراوتر وتسجيل الدخول بنجاح.', 'success');
         this.updateConnectedUI(true);
         this.refreshAllData(true);
@@ -1020,6 +1085,7 @@ class MowajjihApp {
     } catch (err: any) {
       this.isConnected = false;
       this.updateConnectedUI(false);
+      this.logger.error('ROUTER', `تعذر الاتصال بالراوتر (${routerIp}): ${err.message}`, err);
       this.showAlert(err.message || 'تعذر الاتصال بالراوتر. تأكد من صحة كلمة المرور واتصالك بالشبكة.', 'danger');
     } finally {
       this.btnConnectAction.disabled = false;
@@ -1038,8 +1104,10 @@ class MowajjihApp {
       this.stopPingLoop();
       this.updateConnectedUI(false);
       this.clearDataDisplay();
+      this.logger.info('ROUTER', 'تم قطع الاتصال بالراوتر ومسح بيانات الجلسة.');
       this.showAlert('تم قطع الاتصال بالراوتر ومسح بيانات الجلسة من الذاكرة.', 'info');
     } catch (e: any) {
+      this.logger.error('ROUTER', `خطأ أثناء قطع الاتصال بالراوتر: ${e.message}`, e);
       this.showAlert(e.message, 'danger');
     }
   }
@@ -1084,9 +1152,11 @@ class MowajjihApp {
       if (res && res.success && res.data) {
         this.renderStatus(res.data);
       } else if (res && !res.connected) {
+        this.logger.warn('ROUTER', 'انتهت صلاحية جلسة الراوتر أو تم قطع الاتصال من الجهاز.');
         this.disconnect();
       }
-    } catch {
+    } catch (err: any) {
+      this.logger.error('ROUTER', `خطأ أثناء جلب بيانات الحالة من الراوتر: ${err?.message || 'فشل الاتصال'}`, err);
     } finally {
       this.isRefreshing = false;
       if (showSpin) {
@@ -1310,10 +1380,25 @@ class MowajjihApp {
     if (pill4g) pill4g.textContent = data.metrics4G?.band || 'غير متوفر';
 
     if (this.valCurr5gBand) {
-      this.valCurr5gBand.textContent = data.metrics5G?.band || 'غير نشط';
+      const active5g = data.metrics5G?.band || 'غير نشط';
+      if (this.locked5gBands.length > 0) {
+        const locked5gText = this.locked5gBands.map(b => 'N' + b).join(' + ');
+        this.valCurr5gBand.innerHTML = `<span class="text-emerald-400 font-bold">${locked5gText}</span> <span class="text-xs text-slate-400">(${active5g})</span>`;
+      } else {
+        this.valCurr5gBand.textContent = active5g;
+      }
     }
     if (this.valCurr4gBand) {
-      this.valCurr4gBand.textContent = data.metrics4G?.band || data.activeBand || 'غير متوفر';
+      const activeBandName = data.metrics4G?.band || data.activeBand || 'غير متوفر';
+      if (this.locked4gBands.length > 1) {
+        const lockedText = this.locked4gBands.map(b => 'B' + b).join(' + ');
+        const caInfo = (data.caDetails && data.caDetails.length > 0) ? ' [CA نشط]' : '';
+        this.valCurr4gBand.innerHTML = `<span class="text-emerald-400 font-bold">${lockedText}</span> <span class="text-xs text-slate-400">(${activeBandName}${caInfo})</span>`;
+      } else if (this.locked4gBands.length === 1) {
+        this.valCurr4gBand.innerHTML = `<span class="text-emerald-400 font-bold">B${this.locked4gBands[0]}</span> <span class="text-xs text-slate-400">(${activeBandName})</span>`;
+      } else {
+        this.valCurr4gBand.textContent = `${activeBandName} (تلقائي)`;
+      }
     }
 
     // Update WAN toggle status
@@ -2107,7 +2192,12 @@ class MowajjihApp {
         }
 
         // 3. Update 4G bands checkboxes if available
-        if (s.lteBand && !s.isBandAuto) {
+        if (this.locked4gBands && this.locked4gBands.length > 0) {
+          // Keep user-locked multi-bands selection intact, don't overwrite checkboxes with single PCC
+          this.check4gBands.forEach(chk => {
+            chk.checked = this.locked4gBands.includes(chk.value);
+          });
+        } else if (s.lteBand && !s.isBandAuto) {
           const active4g = s.lteBand.split(',').map((b: string) => b.trim());
           this.check4gBands.forEach(chk => {
             chk.checked = active4g.includes(chk.value);
@@ -2115,12 +2205,18 @@ class MowajjihApp {
         }
 
         // 4. Update 5G bands checkboxes if available
-        if (s.nr5gBandMask && s.nr5gBandMask.length < 50) {
+        if (this.locked5gBands && this.locked5gBands.length > 0) {
+          this.check5gBands.forEach(chk => {
+            chk.checked = this.locked5gBands.includes(chk.value);
+          });
+        } else if (s.nr5gBandMask && s.nr5gBandMask.length < 50) {
           const active5g = s.nr5gBandMask.split(',').map((b: string) => b.trim());
           this.check5gBands.forEach(chk => {
             chk.checked = active5g.includes(chk.value);
           });
         }
+
+        this.updateLockedBandsUI();
       }
     } catch {}
   }
@@ -2163,9 +2259,11 @@ class MowajjihApp {
       'تأكيد تغيير نمط الشبكة',
       `أنت على وشك تحويل نمط الشبكة إلى [${label}]. قد ينقطع الاتصال مؤقتاً لمدة 5 إلى 15 ثانية ريثما يعيد الراوتر الاتصال بالبرج.`,
       async () => {
+        this.logger.info('NETWORK', `بدء إرسال أمر تحويل نمط الشبكة إلى [${label}]...`, { mode });
         try {
           const res = await window.mowajjih.setNetworkMode(mode);
           if (res && res.success) {
+            this.logger.success('NETWORK', `تم تغيير نمط الشبكة إلى [${label}] بنجاح!`, { mode, res });
             this.showAlert(res.message, 'success');
             this.fetchNetworkSettings();
             this.refreshAllData(true);
@@ -2173,10 +2271,50 @@ class MowajjihApp {
             throw new Error(res.error || 'فشل تطبيق نمط الشبكة.');
           }
         } catch (err: any) {
+          this.logger.error('NETWORK', `فشل تطبيق نمط الشبكة [${label}]: ${err.message}`, { mode, error: err });
           this.showAlert(`فشل تطبيق نمط الشبكة: ${err.message}`, 'danger');
         }
       }
     );
+  }
+
+  private calculateLteMask(bands: string[]): string {
+    try {
+      let mask = 0n;
+      for (const b of bands) {
+        const num = parseInt(b.replace(/^b/i, ''), 10);
+        if (!isNaN(num) && num >= 1 && num <= 64) {
+          mask |= 1n << BigInt(num - 1);
+        }
+      }
+      return mask.toString(16).toUpperCase();
+    } catch {
+      return '';
+    }
+  }
+
+  private updateLockedBandsUI(): void {
+    const badge5g = document.getElementById('status-locked-5g-bands');
+    if (badge5g) {
+      if (this.locked5gBands && this.locked5gBands.length > 0) {
+        badge5g.textContent = `مثبت: N${this.locked5gBands.join(', N')}`;
+        badge5g.classList.remove('hidden');
+      } else {
+        badge5g.classList.add('hidden');
+      }
+    }
+
+    const badge4g = document.getElementById('status-locked-4g-bands');
+    if (badge4g) {
+      if (this.locked4gBands && this.locked4gBands.length > 0) {
+        const maskHex = this.calculateLteMask(this.locked4gBands);
+        const maskLabel = maskHex ? ` (0x${maskHex})` : '';
+        badge4g.textContent = `مثبت: B${this.locked4gBands.join(', B')}${maskLabel}`;
+        badge4g.classList.remove('hidden');
+      } else {
+        badge4g.classList.add('hidden');
+      }
+    }
   }
 
   private handleApply5gLock(): void {
@@ -2195,9 +2333,25 @@ class MowajjihApp {
       'تأكيد قفل نطاقات 5G NR',
       `سيتم إجبار الراوتر على الاتصال بنطاقات 5G المحددة فقط: [${bandLabels}]. في حال عدم توفر تغطية لهذه النطاقات قد تنقطع إشارة 5G.`,
       async () => {
+        this.logger.info('BANDS', `بدء إرسال أمر قفل ترددات 5G NR: [${bandLabels}]`, { selectedBands: selected, count: selected.length });
         try {
           const res = await window.mowajjih.set5gBands(selected);
           if (res && res.success) {
+            this.locked5gBands = [...selected];
+            try {
+              localStorage.setItem('mowajjih-locked-5g-bands', JSON.stringify(this.locked5gBands));
+            } catch {}
+            this.check5gBands.forEach(chk => {
+              chk.checked = this.locked5gBands.includes(chk.value);
+            });
+            this.updateLockedBandsUI();
+
+            this.logger.success('BANDS', `تم قفل ترددات 5G: [${bandLabels}] على الراوتر بنجاح!`, {
+              selectedBands: selected,
+              mask: res.mask,
+              strategy: res.strategy,
+              routerResponse: res.routerResponse
+            });
             this.showAlert(res.message, 'success');
             this.fetchNetworkSettings();
             this.refreshAllData(true);
@@ -2205,6 +2359,7 @@ class MowajjihApp {
             throw new Error(res.error || 'فشل تطبيق قفل 5G.');
           }
         } catch (err: any) {
+          this.logger.error('BANDS', `فشل قفل ترددات 5G [${bandLabels}]: ${err.message}`, { selectedBands: selected, error: err });
           this.showAlert(`فشل تطبيق قفل 5G: ${err.message}`, 'danger');
         }
       }
@@ -2212,7 +2367,10 @@ class MowajjihApp {
   }
 
   private selectAll5gBands(): void {
-    this.check5gBands.forEach(chk => { chk.checked = true; });
+    const allChecked = Array.from(this.check5gBands).every(chk => chk.checked);
+    this.check5gBands.forEach(chk => { chk.checked = !allChecked; });
+    const btn = document.getElementById('btn-select-all-5g');
+    if (btn) btn.querySelector('span')!.textContent = allChecked ? 'تحديد الكل' : 'إلغاء التحديد';
   }
 
   private handleReset5gLock(): void {
@@ -2220,9 +2378,19 @@ class MowajjihApp {
       'فك قفل نطاقات 5G',
       'سيتم فك قفل نطاقات 5G والعودة للاختيار التلقائي لكافة النطاقات المدعومة بالراوتر.',
       async () => {
+        this.logger.info('BANDS', 'بدء إرسال أمر فك قفل نطاقات 5G NR (العودة للوضع التلقائي)...');
         try {
           const res = await window.mowajjih.set5gBands([]);
           if (res && res.success) {
+            this.locked5gBands = [];
+            try {
+              localStorage.removeItem('mowajjih-locked-5g-bands');
+            } catch {}
+            this.updateLockedBandsUI();
+            this.logger.success('BANDS', 'تم فك قفل ترددات 5G NR وعودة الراوتر للاختيار التلقائي.', {
+              strategy: res.strategy,
+              routerResponse: res.routerResponse
+            });
             this.showAlert(res.message, 'success');
             this.selectAll5gBands();
             this.fetchNetworkSettings();
@@ -2231,6 +2399,7 @@ class MowajjihApp {
             throw new Error(res.error || 'فشل إلغاء قفل 5G.');
           }
         } catch (err: any) {
+          this.logger.error('BANDS', `فشل فك قفل ترددات 5G: ${err.message}`, { error: err });
           this.showAlert(`فشل إلغاء قفل 5G: ${err.message}`, 'danger');
         }
       }
@@ -2249,13 +2418,42 @@ class MowajjihApp {
     }
 
     const bandLabels = selected.map(b => 'B' + b).join(', ');
+    const maskHex = this.calculateLteMask(selected);
+    const multiNote = selected.length > 1
+      ? `\n\n📌 ملاحظة دمج الترددات (CA): عند تثبيت أكثر من تردد، يتصل الراوتر بأحدها كتردد رئيسي (PCC)، ويقوم بدمج الترددات الأخرى (SCC) تلقائياً عند طلب البيانات لتسريع التحميل.`
+      : '';
+
     this.promptBandAction(
       'تأكيد قفل نطاقات 4G LTE',
-      `سيتم إجبار الراوتر على الاتصال بنطاقات 4G المحددة فقط: [${bandLabels}].`,
+      `سيتم إجبار الراوتر على الاتصال بنطاقات 4G المحددة فقط: [${bandLabels}] بقناع (0x${maskHex}).${multiNote}`,
       async () => {
+        this.logger.info('BANDS', `بدء إرسال أمر تثبيت نطاقات 4G LTE: [${bandLabels}] (قناع التردد: 0x${maskHex})`, {
+          selectedBands: selected,
+          mask: `0x${maskHex}`,
+          bandsCount: selected.length
+        });
         try {
           const res = await window.mowajjih.set4gBands({ bands: selected, isAuto: false });
           if (res && res.success) {
+            this.locked4gBands = [...selected];
+            try {
+              localStorage.setItem('mowajjih-locked-4g-bands', JSON.stringify(this.locked4gBands));
+            } catch {}
+            // Keep user selection checkboxes checked
+            this.check4gBands.forEach(chk => {
+              chk.checked = this.locked4gBands.includes(chk.value);
+            });
+            this.updateLockedBandsUI();
+
+            this.logger.success('BANDS', `تم قفل وتثبيت نطاقات 4G LTE: [${bandLabels}] على الراوتر بنجاح!`, {
+              selectedBands: selected,
+              mask: res.mask || `0x${maskHex}`,
+              strategy: res.strategy,
+              routerResponse: res.routerResponse,
+              explanation: selected.length > 1
+                ? 'تم إرسال القناع بنجاح للمودم. سيعرض الراوتر التردد الرئيسي (PCC) النشط حالياً، وتتكامل باقي الترددات عبر التجميع (Carrier Aggregation).'
+                : undefined
+            });
             this.showAlert(res.message, 'success');
             this.fetchNetworkSettings();
             this.refreshAllData(true);
@@ -2263,6 +2461,7 @@ class MowajjihApp {
             throw new Error(res.error || 'فشل تطبيق قفل 4G.');
           }
         } catch (err: any) {
+          this.logger.error('BANDS', `فشل قفل ترددات 4G LTE [${bandLabels}]: ${err.message}`, { selectedBands: selected, mask: `0x${maskHex}`, error: err });
           this.showAlert(`فشل تطبيق قفل 4G: ${err.message}`, 'danger');
         }
       }
@@ -2270,7 +2469,10 @@ class MowajjihApp {
   }
 
   private selectAll4gBands(): void {
-    this.check4gBands.forEach(chk => { chk.checked = true; });
+    const allChecked = Array.from(this.check4gBands).every(chk => chk.checked);
+    this.check4gBands.forEach(chk => { chk.checked = !allChecked; });
+    const btn = document.getElementById('btn-select-all-4g');
+    if (btn) btn.querySelector('span')!.textContent = allChecked ? 'تحديد الكل' : 'إلغاء التحديد';
   }
 
   private handleReset4gLock(): void {
@@ -2278,9 +2480,20 @@ class MowajjihApp {
       'فك قفل نطاقات 4G LTE',
       'سيتم إعادة ضبط نطاقات 4G إلى الوضع التلقائي (Auto) والسماح بالاتصال بكافة الترددات وتجميعها.',
       async () => {
+        this.logger.info('BANDS', 'بدء إرسال أمر فك قفل ترددات 4G LTE والعودة للوضع التلقائي (Auto)...');
         try {
           const res = await window.mowajjih.set4gBands({ bands: [], isAuto: true });
           if (res && res.success) {
+            this.locked4gBands = [];
+            try {
+              localStorage.removeItem('mowajjih-locked-4g-bands');
+            } catch {}
+            this.updateLockedBandsUI();
+            this.logger.success('BANDS', 'تم فك قفل ترددات 4G LTE واستعادة التجميع التلقائي لكافة الترددات.', {
+              mask: res.mask,
+              strategy: res.strategy,
+              routerResponse: res.routerResponse
+            });
             this.showAlert(res.message, 'success');
             this.selectAll4gBands();
             this.fetchNetworkSettings();
@@ -2289,6 +2502,7 @@ class MowajjihApp {
             throw new Error(res.error || 'فشل فك قفل 4G.');
           }
         } catch (err: any) {
+          this.logger.error('BANDS', `فشل فك قفل ترددات 4G: ${err.message}`, { error: err });
           this.showAlert(`فشل فك قفل 4G: ${err.message}`, 'danger');
         }
       }
@@ -2308,9 +2522,11 @@ class MowajjihApp {
       'تأكيد قفل الخلية (Cell Lock)',
       `أنت على وشك قفل الراوتر على الخلية الفيزيائية PCI: [${pci}] والقناة EARFCN: [${earfcn}]. سيتصل الراوتر بهذا البرج حصراً.`,
       async () => {
+        this.logger.info('CELL', `بدء إرسال أمر قفل الخلية والبرج الفيزيائي: PCI=${pci}, EARFCN=${earfcn}`, { pci, earfcn });
         try {
           const res = await window.mowajjih.setCellLock({ pci, earfcn, clear: false });
           if (res && res.success) {
+            this.logger.success('CELL', `تم تأكيد قفل الراوتر على الخلية (PCI: ${pci}, EARFCN: ${earfcn}) بنجاح!`, { pci, earfcn, res });
             this.showAlert(res.message, 'success');
             this.fetchNetworkSettings();
             this.refreshAllData(true);
@@ -2318,6 +2534,7 @@ class MowajjihApp {
             throw new Error(res.error || 'فشل قفل الخلية.');
           }
         } catch (err: any) {
+          this.logger.error('CELL', `فشل قفل الخلية (PCI: ${pci}, EARFCN: ${earfcn}): ${err.message}`, { pci, earfcn, error: err });
           this.showAlert(`فشل قفل الخلية: ${err.message}`, 'danger');
         }
       }
@@ -2329,9 +2546,11 @@ class MowajjihApp {
       'إلغاء قفل الخلية',
       'سيتم إلغاء قفل الخلية والبرج والعودة للاختيار التلقائي لأقوى برج في منطقتك.',
       async () => {
+        this.logger.info('CELL', 'بدء إرسال أمر إلغاء قفل الخلية والبرج والعودة لأقوى برج تلقائياً...');
         try {
           const res = await window.mowajjih.setCellLock({ pci: '0', earfcn: '0', clear: true });
           if (res && res.success) {
+            this.logger.success('CELL', 'تم إلغاء قفل الخلية والبرج بنجاح وعودة الراوتر للاختيار التلقائي.', { res });
             this.showAlert(res.message, 'success');
             this.inputCellPci.value = '';
             this.inputCellEarfcn.value = '';
@@ -2341,6 +2560,7 @@ class MowajjihApp {
             throw new Error(res.error || 'فشل إلغاء قفل الخلية.');
           }
         } catch (err: any) {
+          this.logger.error('CELL', `فشل إلغاء قفل الخلية: ${err.message}`, { error: err });
           this.showAlert(`فشل إلغاء قفل الخلية: ${err.message}`, 'danger');
         }
       }
@@ -2616,12 +2836,60 @@ class MowajjihApp {
       .replace(/'/g, '&#039;');
   }
 
+  public setAutoRefreshInterval(sec: number): void {
+    if (![1, 3, 5].includes(sec)) return;
+    this.autoRefreshIntervalSec = sec;
+    localStorage.setItem('mowajjih-refresh-interval', sec.toString());
+
+    if (!this.autoRefreshToggle.checked) {
+      this.autoRefreshToggle.checked = true;
+    }
+
+    this.updateAutoRefreshUI();
+
+    if (this.isConnected) {
+      this.startAutoRefresh();
+      const secName = sec === 1 ? 'ثانية واحدة' : `${sec} ثوانٍ`;
+      this.showToast(`تم ضبط سرعة التحديث التلقائي إلى: كل ${secName}`, 'info');
+    }
+  }
+
+  private updateAutoRefreshUI(): void {
+    const isEnabled = this.autoRefreshToggle ? this.autoRefreshToggle.checked : true;
+
+    if (this.autoRefreshContainer) {
+      this.autoRefreshContainer.classList.toggle('is-disabled', !isEnabled);
+    }
+
+    if (this.autoRefreshLabel) {
+      if (!isEnabled) {
+        this.autoRefreshLabel.textContent = 'تحديث معطّل';
+      } else {
+        const secText = this.autoRefreshIntervalSec === 1 ? '1 ث' : `${this.autoRefreshIntervalSec} ث`;
+        this.autoRefreshLabel.textContent = `تحديث تلقائي (${secText})`;
+      }
+    }
+
+    if (this.refreshIntervalBtns) {
+      this.refreshIntervalBtns.forEach(btn => {
+        const sec = parseInt(btn.getAttribute('data-sec') || '5', 10);
+        const isActive = sec === this.autoRefreshIntervalSec;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
+      });
+    }
+  }
+
   // Periodic Loops with Smooth Visual Countdown Ring
   private startAutoRefresh(): void {
     this.stopAutoRefresh();
     this.refreshCycleStartTime = Date.now();
 
-    // 100ms interval for smooth circular countdown ring animation
+    if (this.refreshRingProgress) {
+      this.refreshRingProgress.style.strokeDashoffset = '0';
+    }
+
+    // 50ms interval for ultra-smooth circular countdown ring animation
     this.refreshRingTicker = window.setInterval(() => {
       if (!this.refreshRingProgress) return;
       const elapsed = Date.now() - this.refreshCycleStartTime;
@@ -2630,7 +2898,7 @@ class MowajjihApp {
       // Circumference of r=9 is ~56.54
       const offset = 56.54 * fraction;
       this.refreshRingProgress.style.strokeDashoffset = `${offset}`;
-    }, 100);
+    }, 50);
 
     this.autoRefreshTimer = window.setInterval(() => {
       this.refreshCycleStartTime = Date.now();
@@ -2639,7 +2907,7 @@ class MowajjihApp {
         const ringSvg = this.refreshRingProgress.parentElement;
         if (ringSvg) {
           ringSvg.classList.add('pulse-refresh');
-          setTimeout(() => ringSvg.classList.remove('pulse-refresh'), 600);
+          setTimeout(() => ringSvg.classList.remove('pulse-refresh'), 450);
         }
       }
       if (this.isConnected) {
@@ -2738,6 +3006,13 @@ class MowajjihApp {
       { id: 'toggle-wifi', title: 'تبديل حالة بث Wi-Fi (تشغيل / إيقاف)', desc: 'التحكم في البث اللاسلكي', icon: '📶', cat: 'إجراءات فورية', action: () => this.toggleWifiState() },
       { id: 'toggle-wan', title: 'تبديل اتصال بيانات الشريحة (WAN Data)', desc: 'قطع أو توصيل شبكة الجوال', icon: '🌐', cat: 'إجراءات فورية', action: () => this.toggleWanConnection() },
       { id: 'toggle-theme', title: 'تبديل المظهر (نهاري ☀️ / ليلي 🌙)', desc: 'التحويل الفوري بين الوضع الفاتح والوضع الداكن', icon: '🌓', cat: 'إجراءات فورية', action: () => this.toggleTheme() },
+      { id: 'refresh-rate-1s', title: 'ضبط التحديث التلقائي: كل 1 ثانية (1s)', desc: 'تحديث فائق السرعة ولحظي لقراءات الإشارة', icon: '⚡', cat: 'التحديث التلقائي', action: () => this.setAutoRefreshInterval(1) },
+      { id: 'refresh-rate-3s', title: 'ضبط التحديث التلقائي: كل 3 ثوانٍ (3s)', desc: 'تحديث متوازن وسلس لبيانات الراوتر', icon: '⏱️', cat: 'التحديث التلقائي', action: () => this.setAutoRefreshInterval(3) },
+      { id: 'refresh-rate-5s', title: 'ضبط التحديث التلقائي: كل 5 ثوانٍ (5s)', desc: 'تحديث قياسي موفر للطاقة والشبكة', icon: '⏳', cat: 'التحديث التلقائي', action: () => this.setAutoRefreshInterval(5) },
+      { id: 'toggle-auto-refresh', title: 'تبديل التحديث التلقائي (تشغيل / إيقاف)', desc: 'تفعيل أو إيقاف التحديث الدوري تلقائياً', icon: '🔄', cat: 'التحديث التلقائي', action: () => {
+        this.autoRefreshToggle.checked = !this.autoRefreshToggle.checked;
+        this.autoRefreshToggle.dispatchEvent(new Event('change'));
+      } },
 
       { id: 'tab-overview', title: 'الانتقال إلى نظرة عامة والإشارة', desc: 'مؤشرات الإشارة وسرعة الشبكة وقراءات 5G/4G', icon: '📊', cat: 'التنقل في التطبيق', action: () => this.switchTab('overview') },
       { id: 'tab-devices', title: 'الانتقال إلى الأجهزة المتصلة', desc: 'إدارة الهواتف والحواسيب المتصلة', icon: '📱', cat: 'التنقل في التطبيق', action: () => this.switchTab('devices') },
@@ -2745,6 +3020,8 @@ class MowajjihApp {
       { id: 'tab-bands', title: 'الانتقال إلى قفل النطاقات والترددات', desc: 'تثبيت تردد N78 و N41 وتجميع CA', icon: '🎛️', cat: 'التنقل في التطبيق', action: () => this.switchTab('bands') },
       { id: 'tab-sms', title: 'الانتقال إلى الرسائل القصيرة (SMS)', desc: 'قراءة رسائل التفعيل وأكواد OTP', icon: '💬', cat: 'التنقل في التطبيق', action: () => this.switchTab('sms') },
       { id: 'tab-advanced', title: 'الانتقال إلى الإعدادات المتقدمة (Advanced)', desc: 'حفظ الطاقة، إعدادات DHCP، الحماية والصيانة', icon: '⚡', cat: 'التنقل في التطبيق', action: () => this.switchTab('advanced') },
+      { id: 'cmd-adv-logs', title: 'الانتقال إلى سجل النظام المباشر (System Logs)', desc: 'مراقبة أحداث الراوتر وتثبيت الترددات والأعطال', icon: '📋', cat: 'التنقل في التطبيق', action: () => { this.switchTab('advanced'); this.switchAdvancedSubTab('adv-logs'); } },
+      { id: 'cmd-copy-ai-diagnostic', title: 'نسخ تقرير تشخيص المشاكل للمساعد الذكي (AI Report)', desc: 'توليد تقرير شامل بكافة السجلات وقراءات الإشارة لحلها', icon: '🤖', cat: 'نسخ المعلومات', action: () => this.copyAiDiagnosticReport() },
       { id: 'cmd-check-updates', title: 'التحقق من تحديثات فيرموير الراوتر', desc: 'فحص فوري لإصدارات ZTE الجديدة', icon: '🔄', cat: 'إجراءات فورية', action: () => { this.switchTab('advanced'); this.checkFirmwareUpdates(); } },
       { id: 'cmd-network-ping', title: 'تشغيل أداة فحص الاتصال (Ping Diagnostics)', desc: 'اختبار زمن الوصول وفقدان الحزم', icon: '⚡', cat: 'إجراءات فورية', action: () => { this.switchTab('advanced'); this.runPingTest(); } },
       { id: 'cmd-power-sleep', title: 'ضبط وضع النوم الودي (Power Saving)', desc: 'توفير استهلاك طاقة الراوتر', icon: '🌙', cat: 'إجراءات فورية', action: () => { this.switchTab('advanced'); this.switchAdvancedSubTab('adv-power'); } },
@@ -3108,8 +3385,12 @@ class MowajjihApp {
       a.download = `mowajjih-config-${Date.now()}.json`;
       a.click();
       URL.revokeObjectURL(url);
+      this.logger.info('SYSTEM', 'تم تصدير ملف النسخة الاحتياطية للإعدادات بنجاح.');
       this.showToast('تم تصدير ملف النسخة الاحتياطية بنجاح!', 'success');
     });
+
+    // 12. System Logs & AI Diagnostics Console
+    this.initLogsListeners();
   }
 
   public openMacBindingModal(): void {
@@ -3173,6 +3454,8 @@ class MowajjihApp {
     const timeBadge = document.getElementById('adv-last-check-time');
     if (spinner) spinner.classList.remove('hidden');
 
+    this.logger.info('SYSTEM', 'بدء فحص توفر تحديثات فيرموير رسمية من خوادم ZTE...');
+
     if (window.mowajjih) {
       try {
         const res = await window.mowajjih.checkFirmwareUpdate();
@@ -3183,8 +3466,10 @@ class MowajjihApp {
         if (timeBadge) {
           timeBadge.textContent = `الآن (${new Date().toLocaleTimeString('ar-SA')})`;
         }
+        this.logger.info('SYSTEM', `اكتمل فحص تحديثات الفيرموير: ${res.message || 'النظام محدث ومستقر'}`, res);
         this.showToast(res.message || 'إصدار الراوتر الحالي هو الأحدث.', 'success');
       } catch (err: any) {
+        this.logger.warn('SYSTEM', `تعذر التحقق من تحديثات الفيرموير من خادم ZTE: ${err.message}`, err);
         this.showToast(err.message || 'تعذر التحقق من التحديثات من خادم ZTE', 'warning');
       } finally {
         if (spinner) spinner.classList.add('hidden');
@@ -3206,6 +3491,8 @@ class MowajjihApp {
       consoleEl.textContent = `جارٍ إرسال حزم البيانات التجريبية إلى [${host}]... يرجى الانتظار بضع ثوانٍ.`;
     }
 
+    this.logger.info('NETWORK', `بدء فحص Ping للوجهة [${host}]...`);
+
     if (window.mowajjih) {
       try {
         const res = await window.mowajjih.runPingDiagnostic(host);
@@ -3214,6 +3501,7 @@ class MowajjihApp {
           statusBadge.textContent = `استجابة: ${res.latencyMs} ms ✓`;
           statusBadge.className = 'font-mono text-xs text-emerald-400';
         }
+        this.logger.success('NETWORK', `اكتمل فحص Ping إلى [${host}] بنجاح (زمن الاستجابة: ${res.latencyMs} ms)`, res);
         this.showToast(`اكتمل فحص الاتصال بـ ${host} (${res.latencyMs} ms)`, 'success');
       } catch (err: any) {
         if (consoleEl) consoleEl.textContent = `فشل الفحص: ${err.message || 'تعذر الوصول إلى الوجهة.'}`;
@@ -3221,7 +3509,136 @@ class MowajjihApp {
           statusBadge.textContent = 'خطأ في الاتصال ✕';
           statusBadge.className = 'font-mono text-xs text-rose-400';
         }
+        this.logger.error('NETWORK', `فشل فحص Ping إلى [${host}]: ${err.message}`, err);
       }
+    }
+  }
+
+  // ========================================================================
+  // System Logs & AI Diagnostics Console
+  // ========================================================================
+
+  private updateLogStats(stats: { total: number; bands: number; errors: number; success: number }): void {
+    const elTotal = document.getElementById('log-count-total');
+    const elBands = document.getElementById('log-count-bands');
+    const elErrors = document.getElementById('log-count-errors');
+    const elSuccess = document.getElementById('log-count-success');
+    const badgeError = document.getElementById('logs-error-badge');
+
+    if (elTotal) elTotal.textContent = stats.total.toString();
+    if (elBands) elBands.textContent = stats.bands.toString();
+    if (elErrors) elErrors.textContent = stats.errors.toString();
+    if (elSuccess) elSuccess.textContent = stats.success.toString();
+
+    if (badgeError) {
+      if (stats.errors > 0) {
+        badgeError.textContent = stats.errors.toString();
+        badgeError.classList.remove('hidden');
+      } else {
+        badgeError.classList.add('hidden');
+      }
+    }
+  }
+
+  private initLogsListeners(): void {
+    // 1. Filter Chips
+    document.querySelectorAll('.log-filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.log-filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const filter = chip.getAttribute('data-filter') || 'all';
+        this.logger.setFilter(filter);
+      });
+    });
+
+    // 2. Search Input
+    const searchInput = document.getElementById('log-search-input') as HTMLInputElement;
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        this.logger.setSearchQuery(searchInput.value);
+      });
+    }
+
+    // 3. Auto Scroll Toggle
+    const autoScrollCheck = document.getElementById('log-autoscroll-check') as HTMLInputElement;
+    if (autoScrollCheck) {
+      autoScrollCheck.addEventListener('change', () => {
+        this.logger.setAutoScroll(autoScrollCheck.checked);
+      });
+    }
+
+    // 4. Copy AI Diagnostic Report Button
+    const btnCopyAi = document.getElementById('btn-copy-ai-diagnostic');
+    if (btnCopyAi) {
+      btnCopyAi.addEventListener('click', async () => {
+        await this.copyAiDiagnosticReport();
+      });
+    }
+
+    // 5. Export Logs File (.txt)
+    const btnExportFile = document.getElementById('btn-export-logs-file');
+    if (btnExportFile) {
+      btnExportFile.addEventListener('click', () => {
+        const snap = this.getDiagnosticSnapshot();
+        this.logger.downloadLogsFile(snap);
+        this.showToast('تم تصدير وتحميل ملف سجلات النظام (.txt)', 'info');
+        this.logger.info('SYSTEM', 'تم تصدير ملف سجلات النظام وتحميله على الحاسوب.');
+      });
+    }
+
+    // 6. Copy Raw Logs
+    const btnCopyRaw = document.getElementById('btn-copy-raw-logs');
+    if (btnCopyRaw) {
+      btnCopyRaw.addEventListener('click', async () => {
+        const snap = this.getDiagnosticSnapshot();
+        const raw = this.logger.exportAsText(snap);
+        try {
+          await navigator.clipboard.writeText(raw);
+          this.showToast('تم نسخ نصوص السجلات إلى الحافظة بنجاح!', 'success');
+        } catch {
+          this.showToast('تعذر النسخ إلى الحافظة تلقائياً', 'warning');
+        }
+      });
+    }
+
+    // 7. Clear Logs
+    const btnClear = document.getElementById('btn-clear-logs');
+    if (btnClear) {
+      btnClear.addEventListener('click', () => {
+        if (confirm('هل أنت متأكد من رغبتك في مسح كافة السجلات من الذاكرة؟')) {
+          this.logger.clear();
+          this.showToast('تم مسح كافة السجلات من الذاكرة بنجاح.', 'info');
+        }
+      });
+    }
+  }
+
+  public getDiagnosticSnapshot(): DiagnosticSnapshot {
+    return {
+      routerIp: this.inputRouterIp?.value?.trim() || '192.168.0.1',
+      model: 'ZTE MC801A1',
+      isConnected: this.isConnected,
+      networkType: this.badgeCurrMode?.textContent?.trim() || undefined,
+      active5gBand: this.valCurr5gBand?.textContent?.trim() || undefined,
+      active4gBand: this.valCurr4gBand?.textContent?.trim() || undefined,
+      rsrp: document.getElementById('hero-rsrp')?.textContent?.trim() || document.getElementById('kpi-rsrp-val')?.textContent?.trim() || undefined,
+      sinr: document.getElementById('hero-sinr')?.textContent?.trim() || document.getElementById('kpi-sinr-val')?.textContent?.trim() || undefined,
+      cellId: document.getElementById('kpi-cellid-val')?.textContent?.trim() || undefined,
+      pci: document.getElementById('kpi-pci-val')?.textContent?.trim() || this.livePci4g || undefined,
+      earfcn: document.getElementById('kpi-earfcn-val')?.textContent?.trim() || this.liveEarfcn4g || undefined,
+      wanIp: document.getElementById('hero-wan-ip')?.textContent?.trim() || undefined,
+    };
+  }
+
+  public async copyAiDiagnosticReport(): Promise<void> {
+    const snap = this.getDiagnosticSnapshot();
+    const report = this.logger.generateAiDiagnosticReport(snap);
+    try {
+      await navigator.clipboard.writeText(report);
+      this.showToast('تم نسخ تقرير المشاكل والتشخيص للمساعد الذكي! يمكنك لصقه الآن لحل المشكلة فوراً.', 'success');
+      this.logger.info('SYSTEM', 'تم نسخ تقرير التشخيص الموجه للمساعد الذكي إلى الحافظة.');
+    } catch (err: any) {
+      this.showToast('تعذر نسخ التقرير إلى الحافظة تلقائياً.', 'danger');
     }
   }
 

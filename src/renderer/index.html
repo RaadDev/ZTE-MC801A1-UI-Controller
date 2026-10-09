@@ -149,16 +149,21 @@
             <kbd class="cmd-shortcut">Ctrl K</kbd>
           </button>
 
-          <div class="auto-refresh-control">
-            <svg class="refresh-countdown-svg" viewBox="0 0 24 24" width="22" height="22" title="العد التنازلي للتحديث التلقائي">
+          <div class="auto-refresh-control" id="auto-refresh-control" title="التحكم في التحديث التلقائي">
+            <svg class="refresh-countdown-svg" id="refresh-countdown-svg" viewBox="0 0 24 24" width="22" height="22" title="العد التنازلي للتحديث التلقائي">
               <circle class="ring-bg" cx="12" cy="12" r="9" fill="none" stroke="rgba(56, 189, 248, 0.15)" stroke-width="2.5"></circle>
               <circle class="ring-progress" id="refresh-ring-progress" cx="12" cy="12" r="9" fill="none" stroke="var(--accent-sky)" stroke-width="2.5" stroke-dasharray="56.54" stroke-dashoffset="0" stroke-linecap="round"></circle>
             </svg>
-            <label class="switch-label" for="auto-refresh-toggle">
+            <label class="switch-label" for="auto-refresh-toggle" title="تفعيل أو إيقاف التحديث التلقائي">
               <input type="checkbox" id="auto-refresh-toggle" checked />
               <span class="switch-slider"></span>
-              <span class="switch-text">تحديث تلقائي (5 ث)</span>
+              <span class="switch-text" id="auto-refresh-label">تحديث تلقائي (5 ث)</span>
             </label>
+            <div class="refresh-interval-selector" id="refresh-interval-selector" role="radiogroup" aria-label="فترة التحديث التلقائي">
+              <button type="button" class="interval-btn" data-sec="1" role="radio" aria-checked="false" title="تحديث كل 1 ثانية (سريع ولحظي)">1 ث</button>
+              <button type="button" class="interval-btn" data-sec="3" role="radio" aria-checked="false" title="تحديث كل 3 ثوانٍ (متوازن)">3 ث</button>
+              <button type="button" class="interval-btn active" data-sec="5" role="radio" aria-checked="true" title="تحديث كل 5 ثوانٍ (الافتراضي)">5 ث</button>
+            </div>
           </div>
 
           <button class="btn btn-secondary btn-icon-only" id="btn-open-shortcuts" title="دليل اختصارات لوحة المفاتيح (اضغط ؟)">
@@ -974,138 +979,264 @@
           </div>
         </div>
 
+
         <!-- Section 2: 5G & 4G Band Locking Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <!-- 5G NR Band Lock -->
           <div class="content-card">
             <div class="card-title-bar">
-              <h3 class="card-title text-emerald-400">2. قفل نطاقات 5G NR</h3>
+              <div class="flex items-center gap-2">
+                <span class="text-xl">📡</span>
+                <h3 class="card-title text-emerald-400">2. قفل نطاقات 5G NR</h3>
+              </div>
               <span class="badge badge-success">5G Lock</span>
             </div>
-            <p class="text-xs text-slate-300 mt-1 mb-3">حدد النطاقات التي ترغب في تمكين الراوتر من الاتصال بها أو قفلها:</p>
+            <p class="text-xs text-slate-300 mt-1 mb-3">اختر نطاقات الجيل الخامس المصرح للراوتر بالاتصال بها (انقر على البطاقة لتحديد النطاق):</p>
 
             <div class="bands-checkbox-grid" id="grid-5g-bands">
-              <label class="band-checkbox-item">
+              <label class="band-checkbox-item" title="نطاق 5G N78 - 3500 MHz (الأسرع والأكثر شيوعاً)">
                 <input type="checkbox" value="78" class="check-5g-band" checked />
                 <span class="band-num font-mono">N78</span>
-                <span class="band-freq">3500 MHz (الأسرع والأكثر شيوعاً)</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">3500 MHz</span>
+                    <span class="band-tag badge-subtle-emerald">الأسرع ⭐</span>
+                  </div>
+                  <span class="band-freq-desc">سعة فائقة ومثالي للألعاب والتنزيل</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 5G N41 - 2500 MHz (سعة عالية وتغطية واسعة)">
                 <input type="checkbox" value="41" class="check-5g-band" checked />
                 <span class="band-num font-mono">N41</span>
-                <span class="band-freq">2500 MHz (سعة عالية وتغطية واسعة)</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">2500 MHz</span>
+                    <span class="band-tag">TDD</span>
+                  </div>
+                  <span class="band-freq-desc">سعة عالية وتغطية متوازنة</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 5G N77 - 3700 MHz (C-Band 5G)">
                 <input type="checkbox" value="77" class="check-5g-band" checked />
                 <span class="band-num font-mono">N77</span>
-                <span class="band-freq">3700 MHz (C-Band 5G)</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">3700 MHz</span>
+                    <span class="band-tag">C-Band</span>
+                  </div>
+                  <span class="band-freq-desc">حزمة ترددات عريضة وسرعات عالية</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 5G N1 - 2100 MHz (تغطية متقدمة)">
                 <input type="checkbox" value="1" class="check-5g-band" checked />
                 <span class="band-num font-mono">N1</span>
-                <span class="band-freq">2100 MHz (تغطية متقدمة)</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">2100 MHz</span>
+                    <span class="band-tag">FDD</span>
+                  </div>
+                  <span class="band-freq-desc">تغطية متقدمة وتكامل مع 4G</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 5G N3 - 1800 MHz (سرعة وتغطية متوازنة)">
                 <input type="checkbox" value="3" class="check-5g-band" checked />
                 <span class="band-num font-mono">N3</span>
-                <span class="band-freq">1800 MHz (سرعة وتغطية متوازنة)</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">1800 MHz</span>
+                    <span class="band-tag">FDD</span>
+                  </div>
+                  <span class="band-freq-desc">سرعة واستقرار متوازن للشبكة</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 5G N28 - 700 MHz (مدى تغطية واسع جداً واختراق)">
                 <input type="checkbox" value="28" class="check-5g-band" checked />
                 <span class="band-num font-mono">N28</span>
-                <span class="band-freq">700 MHz (مدى تغطية واسع جداً واختراق)</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">700 MHz</span>
+                    <span class="band-tag badge-subtle-amber">اختراق عالي 🏠</span>
+                  </div>
+                  <span class="band-freq-desc">تغطية داخلية واختراق الجدران</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 5G N79 - 4700 MHz (تردد فائق)">
                 <input type="checkbox" value="79" class="check-5g-band" />
                 <span class="band-num font-mono">N79</span>
-                <span class="band-freq">4700 MHz (تردد فائق)</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">4700 MHz</span>
+                    <span class="band-tag">نادر</span>
+                  </div>
+                  <span class="band-freq-desc">تردد فائق لشبكات مخصصة</span>
+                </div>
               </label>
             </div>
 
-            <div class="band-actions-bar mt-4">
-              <button class="btn btn-emerald btn-sm" id="btn-apply-5g-lock">
-                <span>تطبيق قفل 5G</span>
+            <div class="band-actions-bar">
+              <button class="btn btn-emerald btn-sm" id="btn-apply-5g-lock" title="تطبيق وإرسال قفل ترددات 5G إلى الراوتر">
+                <span>🔒 تطبيق قفل 5G</span>
               </button>
-              <button class="btn btn-secondary btn-sm" id="btn-select-all-5g">
+              <button class="btn btn-secondary btn-sm" id="btn-select-all-5g" title="تحديد أو إلغاء تحديد كافة النطاقات">
                 <span>تحديد الكل</span>
               </button>
-              <button class="btn btn-secondary btn-sm" id="btn-reset-5g-lock">
-                <span>فك القفل (تلقائي)</span>
+              <button class="btn btn-secondary btn-sm" id="btn-reset-5g-lock" title="فك القفل والعودة لكافة النطاقات التلقائية">
+                <span>🔄 فك القفل (تلقائي)</span>
               </button>
+              <span class="badge badge-success text-xs hidden" id="status-locked-5g-bands">مقفل</span>
             </div>
           </div>
 
           <!-- 4G LTE Band Lock -->
           <div class="content-card">
             <div class="card-title-bar">
-              <h3 class="card-title text-cyan-400">3. قفل نطاقات 4G LTE</h3>
+              <div class="flex items-center gap-2">
+                <span class="text-xl">📶</span>
+                <h3 class="card-title text-cyan-400">3. قفل نطاقات 4G LTE</h3>
+              </div>
               <span class="badge badge-info">LTE Lock</span>
             </div>
             <p class="text-xs text-slate-300 mt-1 mb-3">اختر ترددات الجيل الرابع المسموحة للمودم وتجميع الترددات (CA):</p>
 
             <div class="bands-checkbox-grid" id="grid-4g-bands">
-              <label class="band-checkbox-item">
+              <label class="band-checkbox-item" title="نطاق 4G B1 - 2100 MHz FDD">
                 <input type="checkbox" value="1" class="check-4g-band" checked />
                 <span class="band-num font-mono">B1</span>
-                <span class="band-freq">2100 MHz FDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">2100 MHz</span>
+                    <span class="band-tag">FDD</span>
+                  </div>
+                  <span class="band-freq-desc">نطاق أساسي وتجميع CA</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 4G B3 - 1800 MHz FDD">
                 <input type="checkbox" value="3" class="check-4g-band" checked />
                 <span class="band-num font-mono">B3</span>
-                <span class="band-freq">1800 MHz FDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">1800 MHz</span>
+                    <span class="band-tag badge-subtle-sky">الأكثر انتشاراً ⭐</span>
+                  </div>
+                  <span class="band-freq-desc">سعة عالية وسرعة تصفح ممتازة</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 4G B7 - 2600 MHz FDD">
                 <input type="checkbox" value="7" class="check-4g-band" checked />
                 <span class="band-num font-mono">B7</span>
-                <span class="band-freq">2600 MHz FDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">2600 MHz</span>
+                    <span class="band-tag">FDD</span>
+                  </div>
+                  <span class="band-freq-desc">سرعات تنزيل عالية في المدن</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 4G B8 - 900 MHz FDD">
                 <input type="checkbox" value="8" class="check-4g-band" checked />
                 <span class="band-num font-mono">B8</span>
-                <span class="band-freq">900 MHz FDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">900 MHz</span>
+                    <span class="band-tag">FDD</span>
+                  </div>
+                  <span class="band-freq-desc">تغطية واسعة واستقرار عالي</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 4G B20 - 800 MHz FDD">
                 <input type="checkbox" value="20" class="check-4g-band" checked />
                 <span class="band-num font-mono">B20</span>
-                <span class="band-freq">800 MHz FDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">800 MHz</span>
+                    <span class="band-tag">FDD</span>
+                  </div>
+                  <span class="band-freq-desc">تغطية ريفية وبعيدة المدى</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 4G B28 - 700 MHz FDD">
                 <input type="checkbox" value="28" class="check-4g-band" checked />
                 <span class="band-num font-mono">B28</span>
-                <span class="band-freq">700 MHz FDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">700 MHz</span>
+                    <span class="band-tag badge-subtle-amber">اختراق مباني 🏠</span>
+                  </div>
+                  <span class="band-freq-desc">اختراق عميق للمباني والعوازل</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 4G B38 - 2600 MHz TDD">
                 <input type="checkbox" value="38" class="check-4g-band" checked />
                 <span class="band-num font-mono">B38</span>
-                <span class="band-freq">2600 MHz TDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">2600 MHz</span>
+                    <span class="band-tag">TDD</span>
+                  </div>
+                  <span class="band-freq-desc">تفريغ سعة وحزم مخصصة</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 4G B40 - 2300 MHz TDD">
                 <input type="checkbox" value="40" class="check-4g-band" checked />
                 <span class="band-num font-mono">B40</span>
-                <span class="band-freq">2300 MHz TDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">2300 MHz</span>
+                    <span class="band-tag">TDD</span>
+                  </div>
+                  <span class="band-freq-desc">سعة شبكة إضافية (STC / موبايلي)</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 4G B41 - 2500 MHz TDD">
                 <input type="checkbox" value="41" class="check-4g-band" checked />
                 <span class="band-num font-mono">B41</span>
-                <span class="band-freq">2500 MHz TDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">2500 MHz</span>
+                    <span class="band-tag">TDD</span>
+                  </div>
+                  <span class="band-freq-desc">تغطية تكميلية وسرعة ممتازة</span>
+                </div>
               </label>
-              <label class="band-checkbox-item">
+
+              <label class="band-checkbox-item" title="نطاق 4G B42 - 3500 MHz TDD">
                 <input type="checkbox" value="42" class="check-4g-band" checked />
                 <span class="band-num font-mono">B42</span>
-                <span class="band-freq">3500 MHz TDD</span>
+                <div class="band-info">
+                  <div class="band-freq-row">
+                    <span class="band-freq-val">3500 MHz</span>
+                    <span class="band-tag">TDD</span>
+                  </div>
+                  <span class="band-freq-desc">نطاق CBRS وسرعات عالية</span>
+                </div>
               </label>
             </div>
 
-            <div class="band-actions-bar mt-4">
-              <button class="btn btn-primary btn-sm" id="btn-apply-4g-lock">
-                <span>تطبيق قفل 4G</span>
+            <div class="band-actions-bar">
+              <button class="btn btn-primary btn-sm" id="btn-apply-4g-lock" title="تطبيق وإرسال قفل ترددات 4G وتجميعها للراوتر">
+                <span>🔒 تطبيق قفل 4G</span>
               </button>
-              <button class="btn btn-secondary btn-sm" id="btn-select-all-4g">
+              <button class="btn btn-secondary btn-sm" id="btn-select-all-4g" title="تحديد أو إلغاء تحديد كافة النطاقات">
                 <span>تحديد الكل</span>
               </button>
-              <button class="btn btn-secondary btn-sm" id="btn-reset-4g-lock">
-                <span>فك القفل (Auto)</span>
+              <button class="btn btn-secondary btn-sm" id="btn-reset-4g-lock" title="فك القفل وإتاحة جميع الترددات التلقائية">
+                <span>🔄 فك القفل (Auto)</span>
               </button>
+              <span class="badge badge-info text-xs hidden" id="status-locked-4g-bands">مقفل</span>
             </div>
           </div>
         </div>
@@ -1226,6 +1357,11 @@
           <button class="adv-subnav-btn" data-subtab="adv-tools" id="btn-subtab-tools" role="tab" aria-selected="false">
             <span class="adv-btn-icon">⚙️</span>
             <span class="adv-btn-label">الصيانة وأخرى</span>
+          </button>
+          <button class="adv-subnav-btn" data-subtab="adv-logs" id="btn-subtab-logs" role="tab" aria-selected="false">
+            <span class="adv-btn-icon">📋</span>
+            <span class="adv-btn-label">سجل النظام (Logs)</span>
+            <span class="badge badge-danger text-xs hidden" id="logs-error-badge">0</span>
           </button>
         </div>
 
@@ -1816,6 +1952,101 @@
                     </div>
                     <button class="btn btn-danger btn-sm" id="btn-adv-factory-reset-action">استعادة ضبط المصنع</button>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Pane 6: سجل النظام والتشخيص (System Logs & AI Diagnostics) -->
+        <div class="adv-subpane" id="subpane-adv-logs" role="tabpanel">
+          <div class="dashboard-grid">
+            <!-- AI Diagnostic Summary Box -->
+            <div class="card col-span-2 logs-ai-card">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="logs-hero-icon">🤖</div>
+                  <div>
+                    <h3 class="card-title text-base text-cyan-400">سجل التشخيص المباشر وتقرير المشاكل للمساعد الذكي</h3>
+                    <p class="card-desc text-xs mt-1 text-slate-300">
+                      مراقبة حية لكافة عمليات الراوتر، محاولات تثبيت الترددات ونجاحها/فشلها، والأعطال لنسخها وإرسالها للمساعد الذكي لحلها فوراً.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <button class="btn btn-primary btn-sm" id="btn-copy-ai-diagnostic" title="نسخ تقرير شامل منسق جاهز للصق في محادثة الذكاء الاصطناعي">
+                    <span>🤖 نسخ تقرير المشاكل للمساعد الذكي</span>
+                  </button>
+                  <button class="btn btn-secondary btn-sm" id="btn-export-logs-file" title="تحميل كافة السجلات كملف نصي (.txt)">
+                    <span>💾 تحميل السجل (.txt)</span>
+                  </button>
+                  <button class="btn btn-secondary btn-sm" id="btn-copy-raw-logs" title="نسخ كافة السجلات النصية الحالية">
+                    <span>📋 نسخ السجلات</span>
+                  </button>
+                  <button class="btn btn-secondary btn-sm text-rose-400" id="btn-clear-logs" title="مسح كافة السجلات من الذاكرة">
+                    <span>🧹 مسح</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quick Log Metrics Strip -->
+              <div class="log-metrics-strip mt-3">
+                <div class="log-metric-item">
+                  <span class="log-metric-label">إجمالي السجلات:</span>
+                  <span class="log-metric-val font-mono" id="log-count-total">0</span>
+                </div>
+                <div class="log-metric-item">
+                  <span class="log-metric-label">أحداث الترددات (Bands):</span>
+                  <span class="log-metric-val font-mono text-cyan-400" id="log-count-bands">0</span>
+                </div>
+                <div class="log-metric-item">
+                  <span class="log-metric-label">أخطاء ومشاكل (Errors):</span>
+                  <span class="log-metric-val font-mono text-rose-400" id="log-count-errors">0</span>
+                </div>
+                <div class="log-metric-item">
+                  <span class="log-metric-label">استجابات ناجحة (Success):</span>
+                  <span class="log-metric-val font-mono text-emerald-400" id="log-count-success">0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terminal / Console Card -->
+            <div class="card col-span-2 log-console-card">
+              <!-- Console Toolbar -->
+              <div class="log-console-toolbar">
+                <div class="log-filters-group">
+                  <span class="text-xs text-slate-400 font-bold ml-1">تصفية السجلات:</span>
+                  <button type="button" class="log-filter-chip active" data-filter="all">الكل</button>
+                  <button type="button" class="log-filter-chip" data-filter="bands">📶 قفل الترددات</button>
+                  <button type="button" class="log-filter-chip" data-filter="error">❌ الأخطاء فقط</button>
+                  <button type="button" class="log-filter-chip" data-filter="warn">⚠️ التحذيرات</button>
+                  <button type="button" class="log-filter-chip" data-filter="success">✅ العمليات الناجحة</button>
+                  <button type="button" class="log-filter-chip" data-filter="router">🌐 الراوتر والجسر</button>
+                </div>
+
+                <div class="log-search-group">
+                  <input type="text" id="log-search-input" class="log-search-input" placeholder="🔍 بحث في نصوص السجلات والـ Payloads..." />
+                  <label class="log-autoscroll-label" title="التمرير تلقائياً لأسفل عند ورود سجل جديد">
+                    <input type="checkbox" id="log-autoscroll-check" checked />
+                    <span>تمرير تلقائي</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Terminal Window Frame -->
+              <div class="terminal-window">
+                <div class="terminal-header">
+                  <div class="terminal-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <span class="terminal-title font-mono">mowajjih-diagnostics.log — وحدة مراقبة الراوتر وقفل الترددات</span>
+                  <span class="terminal-status font-mono text-emerald-400">● LIVE</span>
+                </div>
+
+                <div class="terminal-body font-mono" id="log-entries-container">
+                  <!-- Log entries rendered dynamically -->
                 </div>
               </div>
             </div>
