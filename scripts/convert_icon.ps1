@@ -1,6 +1,6 @@
 Add-Type -AssemblyName System.Drawing
 
-$imgSrc = "C:\Users\OPN_I\.gemini\antigravity-ide\brain\ddca7126-1f69-44e9-8940-a98148864edb\mowajjih_icon_pro_1791548292280.jpg"
+$imgSrc = "C:\Users\OPN_I\.gemini\antigravity-ide\brain\ddca7126-1f69-44e9-8940-a98148864edb\zte_router_icon_1791548759115.jpg"
 
 if (-not (Test-Path "assets")) {
     New-Item -ItemType Directory -Path "assets" | Out-Null
