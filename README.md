@@ -19,11 +19,11 @@
 <div align="center">
 
 <a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest/download/mowajjih-portable.exe">
-  <img src="https://img.shields.io/badge/🟢_تشغيل_مباشر_بدون_تثبيت_(الأسهل)-mowajjih--portable.exe-10b981?style=for-the-badge&logo=windows&logoColor=white" height="42" alt="تحميل النسخة المحمولة">
+  <img src="assets/badge-portable.svg" alt="🟢 تشغيل مباشر بدون تثبيت (الأسهل) - mowajjih-portable.exe" height="52">
 </a>
 <br><br>
 <a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest/download/mowajjih-setup.exe">
-  <img src="https://img.shields.io/badge/🔵_تثبيت_على_الجهاز_(مع_اختصار_سطح_المكتب)-mowajjih--setup.exe-0284c7?style=for-the-badge&logo=windows&logoColor=white" height="38" alt="تحميل مثبت Setup">
+  <img src="assets/badge-setup.svg" alt="🔵 تثبيت على الجهاز (مع اختصار سطح المكتب) - mowajjih-setup.exe" height="52">
 </a>
 
 </div>
