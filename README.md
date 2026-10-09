@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/icon.png" alt="أيقونة تطبيق موجّه" width="108" height="108" style="border-radius: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.35);">
+<img src="assets/icon.png" alt="أيقونة تطبيق موجّه" width="112" height="112" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
 
 # تطبيق موجّه (Mowajjih)
 ### أداة إدارة وتثبيت ترددات راوتر ZTE 5G
@@ -9,113 +9,115 @@
 
 <br>
 
-<a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest">
-  <img src="assets/badge-release.svg" alt="الإصدار الأخير - v1.0.1" height="28">
-</a>
-&nbsp;&nbsp;
-<a href="LICENSE">
-  <img src="assets/badge-license.svg" alt="الترخيص - MIT" height="28">
-</a>
+<p align="center">
+  <a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest">
+    <img src="assets/badge-release.svg" alt="الإصدار الأخير - v1.0.1" height="28">
+  </a>
+  &nbsp;
+  <a href="LICENSE">
+    <img src="assets/badge-license.svg" alt="الترخيص - MIT" height="28">
+  </a>
+</p>
 
 </div>
 
 ---
 
-## تحميل البرنامج
-
-اضغط على النسخة التي تفضلها للتحميل المباشر:
+## 📸 لقطات من التطبيق
 
 <div align="center">
-
-<a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest/download/mowajjih-portable.exe">
-  <img src="assets/badge-portable.svg" alt="تشغيل مباشر بدون تثبيت (الأسهل) - mowajjih-portable.exe" height="52">
-</a>
-<br><br>
-<a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest/download/mowajjih-setup.exe">
-  <img src="assets/badge-setup.svg" alt="تثبيت على الجهاز (مع اختصار سطح المكتب) - mowajjih-setup.exe" height="52">
-</a>
-
+  <img src="assets/الشاشة%20الرئيسية%20بعد%20التسجيل.png" alt="لوحة التحكم الرئيسية" width="880" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
+  <p align="center"><sub><b>لوحة التحكم الرئيسية:</b> متابعة لحظية لقوة الإشارة، الترددات النشطة (5G/4G)، وبيانات البرج</sub></p>
 </div>
 
 <br>
 
-### الفرق بين النسختين
+| 📡 تثبيت النطاقات وقفل البرج (Cell Lock) | 🧭 مساعد توجيه الإشارة والتنبيه الصوتي |
+| :---: | :---: |
+| <img src="assets/تثبيت%20النطاقات.png" alt="تثبيت النطاقات" width="100%" style="border-radius: 8px;"> | <img src="assets/مساعد%20الانتينا%20و%20الاشاره.png" alt="مساعد توجيه الإشارة" width="100%" style="border-radius: 8px;"> |
+| <b>قفل ترددات محددة وتثبيت البرج لاستقرار الاتصال</b> | <b>مؤشر توجيه دقيق مع منبه صوتي ذكي لتوجيه الأنتينا</b> |
+| 🔐 **تسجيل الدخول والاتصال السريع** | ⚙️ **الإعدادات المتقدمة وسجلات التشخيص** |
+| <img src="assets/الشاشة%20الرئيسية.png" alt="شاشة تسجيل الدخول" width="100%" style="border-radius: 8px;"> | <img src="assets/الاعدادات%20المتقدمة.png" alt="الإعدادات المتقدمة" width="100%" style="border-radius: 8px;"> |
+| <b>واجهة تسجيل سلسة مع حفظ بيانات الدخول تلقائياً</b> | <b>خيارات متقدمة، التحكم بالشبكة، وسجلات تفاعلية فورية</b> |
+
+---
+
+## 🚀 تحميل البرنامج
+
+اضغط على النسخة المناسبة لك للتحميل المباشر:
+
+<div align="center">
+  <a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest/download/mowajjih-portable.exe">
+    <img src="assets/badge-portable.svg" alt="تشغيل مباشر بدون تثبيت (الأسهل) - mowajjih-portable.exe" height="48">
+  </a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/RaadDev/ZTE-MC801A1-UI-Controller/releases/latest/download/mowajjih-setup.exe">
+    <img src="assets/badge-setup.svg" alt="تثبيت على الجهاز (مع اختصار سطح المكتب) - mowajjih-setup.exe" height="48">
+  </a>
+</div>
+
+<br>
+
+> [!TIP]
+> **نصيحة:** النسخة المحمولة (**`mowajjih-portable.exe`**) تعمل فوراً بنقرة واحدة بدون أي خطوات تثبيت، وتستطيع تشغيلها من أي مكان أو نقلها على فلاش ميموري بسهولة.
+
+<details>
+<summary><b>🔍 تفاصيل الفرق بين النسختين (اضغط للتوسيع)</b></summary>
+<br>
 
 * **النسخة المحمولة (`mowajjih-portable.exe`) — موصى بها:**
-  * تعمل فوراً بنقرة واحدة بدون أي خطوات تثبيت.
-  * لا تضيف أي ملفات داخل النظام، وتستطيع وضعها على فلاش ميموري وتشغيلها في أي جهاز مباشرة.
-  * لحذفها، يكفي حذف الملف نفسه فقط.
-
+  * تعمل فوراً بدون تثبيت وبدون ترك أي ملفات داخل النظام.
+  * مناسبة للتجربة السريعة أو النقل بين الأجهزة.
 * **نسخة التثبيت (`mowajjih-setup.exe`):**
-  * برنامج تثبيت تقليدي يثبت التطبيق في ملفات النظام، ويضع اختصاراً على سطح المكتب وقائمة ابدأ.
+  * برنامج تثبيت تقليدي يثبت التطبيق في ملفات النظام، مع اختصار على سطح المكتب وقائمة ابدأ.
+
+</details>
 
 ---
 
-## مميزات البرنامج
+## ✨ المميزات الرئيسية
 
-* **تثبيت الترددات (5G و 4G):**
-  * قفل تردد واحد أو دمج عدة ترددات معاً لرفع السرعة واستقرار الاتصال.
-  * تثبيت الراوتر على برج محدد لمنع التنقل العشوائي وتقطيع البث (Cell Lock).
-  * اختيار نمط الشبكة (تلقائي، 5G فقط، 4G فقط).
-* **مراقبة الإشارة لحظياً:**
+* 📶 **تثبيت الترددات (5G و 4G):**
+  * قفل تردد واحد أو دمج عدة ترددات معاً لرفع السرعة وضمان استقرار البث.
+  * تثبيت الراوتر على برج محدد لمنع التنقل العشوائي وتقطيع الاتصال (Cell Lock).
+  * التبديل السهل بين الأنماط (تلقائي، 5G فقط، 4G فقط).
+
+* 📡 **مراقبة الإشارة لحظياً:**
   * قراءة دقيقة لقوة الإشارة (RSRP) ونقائها (SINR) وبيانات البرج المتصل.
-  * تحديث القراءات تلقائياً (كل ثانية، 3 ثوانٍ، أو 5 ثوانٍ).
-  * منبه صوتي توجيهي (Audio Beacon) لمساعدتك في توجيه الراوتر لأفضل زاوية دون الحاجة للنظر للشاشة.
-* **إدارة الراوتر والشبكة:**
-  * كشف الأجهزة المتصلة ونوع كل جهاز.
-  * قراءة رسائل الشريحة (SMS) واستلام أكواد التحقق وحذف الرسائل القديمة.
-  * مشاركة شبكة الواي فاي عبر رمز الاستجابة السريعة (QR Code).
-  * سجلات تشخيص تفاعلية (Logs) لكشف وحل المشكلات فوراً.
+  * تحديث القراءات دورياً بتوقيت قابل للتخصيص (1، 3، أو 5 ثوانٍ).
+  * **منبه صوتي توجيهي (Audio Beacon):** يساعدك في توجيه الراوتر نحو أفضل زاوية دون الحاجة للنظر إلى الشاشة.
+
+* 🛠️ **إدارة الراوتر والأمان:**
+  * كشف الأجهزة المتصلة ونوع كل جهاز في الوقت الفعلي.
+  * إدارة رسائل الشريحة (SMS) واستلام رموز التحقق وحذف الرسائل.
+  * مشاركة شبكة الواي فاي بسهولة عبر رمز الاستجابة السريعة (QR Code).
+  * سجلات تشخيص تفاعلية (Live Logs) لكشف وحل المشكلات بدقة.
 
 ---
 
-## لقطات من التطبيق
+## 📖 طريقة الاستخدام
 
-<div align="center">
-
-### لوحة التحكم الرئيسية
-<img src="assets/الشاشة%20الرئيسية%20بعد%20التسجيل.png" alt="لوحة التحكم الرئيسية" width="850" style="border-radius: 10px; max-width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
-
-<br><br>
-
-### تثبيت النطاقات ومساعد توجيه الإشارة
-<p align="center">
-  <img src="assets/تثبيت%20النطاقات.png" alt="تثبيت النطاقات والترددات" width="48%" style="border-radius: 8px; vertical-align: top;">
-  &nbsp;
-  <img src="assets/مساعد%20الانتينا%20و%20الاشاره.png" alt="مساعد توجيه الإشارة والأنتينا" width="48%" style="border-radius: 8px; vertical-align: top;">
-</p>
-
-<br>
-
-### شاشة تسجيل الدخول والإعدادات المتقدمة
-<p align="center">
-  <img src="assets/الشاشة%20الرئيسية.png" alt="شاشة تسجيل الدخول" width="48%" style="border-radius: 8px; vertical-align: top;">
-  &nbsp;
-  <img src="assets/الاعدادات%20المتقدمة.png" alt="الإعدادات المتقدمة والتشخيص" width="48%" style="border-radius: 8px; vertical-align: top;">
-</p>
-
-</div>
+1. حمّل البرنامج وشغّله.
+2. أدخل عنوان IP الراوتر (الافتراضي: `192.168.0.1`) وكلمة المرور.
+3. اضغط **اتصال** وستفتح لك لوحة التحكم فوراً.
 
 ---
 
-## طريقة الاستخدام
-
-1. حمّل البرنامج وافتحه.
-2. اكتب عنوان IP الراوتر (الافتراضي: `192.168.0.1`) وكلمة المرور.
-3. اضغط **اتصال**.
-
----
-
-## للمطورين
+## 💻 للمطورين
 
 ```bash
-npm install     # تثبيت الحزم
-npm start       # تشغيل في بيئة التطوير
-npm run dist    # بناء ملفات .exe
+# تثبيت الحزم والمكتبات
+npm install
+
+# تشغيل في بيئة التطوير
+npm start
+
+# بناء حزم التثبيت وملفات الـ exe
+npm run dist
 ```
 
 ---
 
-## الترخيص
+## 📜 الترخيص
 
-المشروع مفتوح المصدر ومتاح مجاناً للجميع تحت رخصة **MIT**.
+المشروع مفتوح المصدر ومتاح مجاناً للجميع تحت رخصة **[MIT](LICENSE)**.
